@@ -8,3 +8,6 @@ dist
 # Internal team notes (not part of the English-only submission)
 CONTEXT.md
 RESEARCH.md
+
+# Handoff archives
+*.zip
