@@ -34,7 +34,7 @@ export function CrewRail({ assessments }: { assessments: Record<string, Assessme
               <span className="heading block text-[1.05rem] leading-tight">{member.name}</span>
               <span className="label block truncate">{member.role}</span>
               <span className="mt-1 flex items-center justify-between gap-2">
-                <span className={`flex items-center gap-1.5 text-[0.92rem] font-semibold ${ui.text}`} style={{ fontStretch: '86%' }}>
+                <span className={`flex items-center gap-1.5 whitespace-nowrap text-[0.92rem] font-semibold ${ui.text}`} style={{ fontStretch: '86%' }}>
                   <StatusIcon level={a.overall} size={17} />
                   {ui.word}
                 </span>

@@ -120,7 +120,7 @@ export function assess(readings: readonly Reading[], now: number): Assessment | 
       metric: key,
       level: partLevel(part),
       kind: 'news2',
-      text: `${info.label} ${formatMetric(key, value)} ${info.unit} is ${side} (NEWS2 +${part}).`,
+      text: `${info.label} ${formatMetric(key, value)}${/^[%/°]/.test(info.unit) && info.unit !== '°C' ? '' : ' '}${info.unit} is ${side} (NEWS2 +${part}).`,
       sourceId: 'news2',
     })
   }

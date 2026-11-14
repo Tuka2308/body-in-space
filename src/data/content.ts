@@ -230,6 +230,12 @@ const ACTIONS: Partial<Record<MetricKey, ActionRule>> = {
   },
 }
 
+/** Generic advice for one measurement when it is flagged (used by the assistant). */
+export function genericActions(metric: MetricKey, m: Partial<Metrics> = {}): string[] {
+  const rule = ACTIONS[metric]?.caution
+  return typeof rule === 'function' ? rule(m) : (rule ?? [])
+}
+
 /** Actions for the flagged findings of a body zone, most serious first, without repeats. */
 export function actionsFor(findings: readonly Finding[], m: Partial<Metrics>): string[] {
   const rank: Record<Level, number> = { ok: 0, caution: 1, alert: 2 }
