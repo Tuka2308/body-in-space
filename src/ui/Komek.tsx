@@ -7,6 +7,7 @@ import { taskKey } from '../data/tasks'
 import { EXERCISE } from '../data/thresholds'
 import type { Level, OrganId } from '../engine/types'
 import { linkSentence, sosAlert, statusAlert, type KomekAction } from '../si/assistant'
+import { activeSolarEvent, useDonki } from '../state/donki'
 import { komekContext, useKomek, type KomekMessage } from '../state/komek'
 import { go, useRoute } from '../state/route'
 import { openTasks, useAllAssessments } from '../state/selectors'
@@ -178,6 +179,33 @@ function useKomekWatcher() {
       }
     }
   }, [minute, selectedId, ready, sosActive])
+
+  // Space weather: load the NASA DONKI feed once, speak up when an event calls for the shelter.
+  const donkiEvents = useDonki((s) => s.events)
+  const donkiSimulated = useDonki((s) => s.simulated)
+  const solarSaid = useRef<string | null>(null)
+  useEffect(() => {
+    void useDonki.getState().load()
+  }, [])
+  useEffect(() => {
+    if (!ready) return
+    const event = activeSolarEvent({ events: donkiEvents, simulated: donkiSimulated })
+    if (!event) {
+      solarSaid.current = null
+      return
+    }
+    if (solarSaid.current === event.id) return
+    solarSaid.current = event.id
+    useKomek.getState().say(
+      {
+        text: `Solar event detected — go to storm shelter. ${event.kind}, ${event.detail}.`,
+        sourceId: event.id === 'simulated' ? undefined : 'donki',
+        level: 'caution',
+        actions: [{ label: 'Open Radiation', route: 'organ/radiation' }],
+      },
+      true,
+    )
+  }, [donkiEvents, donkiSimulated, ready])
 
   // A new environment changes who can help and how fast.
   useEffect(() => {

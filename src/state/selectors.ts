@@ -8,6 +8,7 @@ import { news2 } from '../engine/news2'
 import { latestMetrics } from '../engine/readings'
 import type { Point, Reading } from '../engine/types'
 import { SIM_READINGS } from '../sim/simulator'
+import { activeSolarEvent, useDonki } from './donki'
 import { useApp } from './store'
 import { DAY, missionDay } from './time'
 
@@ -65,18 +66,21 @@ export interface EnvStatus {
 export function useEnvStatus(crewId: string): EnvStatus {
   const env = useEnvironment()
   const day = missionDay(useApp((s) => s.now))
+  const donkiEvents = useDonki((s) => s.events)
+  const simulated = useDonki((s) => s.simulated)
   return useMemo(() => {
+    const solarEvent = activeSolarEvent({ events: donkiEvents, simulated }) !== null
     const missionDoseMsv = env.doseRateMsvDay * day
     const careerMsv = crewById(crewId).priorCareerMsv + missionDoseMsv
     return {
       env,
       air: co2Check(env.co2HourMean, env.co2WeekMean),
-      radiation: radiationCheck({ careerMsv, eventMsv: 0, solarEvent: false }),
+      radiation: radiationCheck({ careerMsv, eventMsv: 0, solarEvent }),
       missionDoseMsv,
       careerMsv,
       boneLoss: boneLossEstimate(env, day),
     }
-  }, [env, day, crewId])
+  }, [env, day, crewId, donkiEvents, simulated])
 }
 
 /** NEWS2 total at every vitals reading in the last 24 h, plus now. */

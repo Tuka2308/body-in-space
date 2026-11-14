@@ -18,6 +18,7 @@ import { LineChart } from './charts/LineChart'
 import { linkText } from './EarthLink'
 import { BackIcon, PlusIcon } from './icons'
 import { LEVEL_UI, StatusIcon, StatusPill } from './level'
+import { SpaceWeather } from './SpaceWeather'
 
 const ZONES: ZoneId[] = ['brain', 'eyes', 'heart', 'lungs', 'blood', 'bones', 'skin', 'air', 'radiation']
 export const isZone = (value: string | undefined): value is ZoneId => ZONES.includes(value as ZoneId)
@@ -302,6 +303,8 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
                 />
               </div>
             </>
+          ) : zone === 'radiation' ? (
+            <SpaceWeather />
           ) : (
             <div className="flex flex-1 flex-col justify-center gap-2">
               {envCheck && (
@@ -313,9 +316,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
               <p className="text-dim">
                 {zone === 'eyes'
                   ? 'The grid self-check has no number to plot. Each check is logged with its date.'
-                  : zone === 'radiation'
-                    ? `${env.env.doseNote} ${env.env.evacuation}.`
-                    : `Cabin readings for ${env.env.name}. ${env.env.evacuation}.`}
+                  : `Cabin readings for ${env.env.name}. ${env.env.evacuation}.`}
               </p>
             </div>
           )}
