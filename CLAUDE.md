@@ -50,4 +50,4 @@ To do, in order:
 
 Known issues: the DONKI solar-flare endpoint (FLR) returned 404 on 2026-11-14 while CME worked; the code tolerates it.
 The public DONKI demo key is rate-limited (429), so the feed is cached and retried at most every 10 minutes.
-OSD-656 is cited as reviewed but is not charted.
+OSD-656 is cited only as related data; it is not downloaded or charted.

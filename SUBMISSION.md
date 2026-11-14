@@ -41,7 +41,7 @@ Source code: https://github.com/Tuka2308/body-in-space
 ## NASA data
 
 - **NASA Human Research Program** (five hazards, human health risks): the basis for the body zones and the "why it matters in space" facts.
-- **NASA Open Science Data Repository**: OSD-569 (Inspiration4 complete blood count) and OSD-575 (Inspiration4 metabolic panel) are loaded as published and charted for four crew members from 92 days before launch to 194 days after return. OSD-656 (urine inflammation panel) was reviewed for the same crew.
+- **NASA Open Science Data Repository**: OSD-569 (Inspiration4 complete blood count) and OSD-575 (Inspiration4 metabolic panel) are loaded as published and charted for four crew members from 92 days before launch to 194 days after return. OSD-656 (urine inflammation panel of the same crew) is related data that this version does not use yet.
 - **NASA DONKI**: live solar flares and coronal mass ejections drive the radiation zone and KOMEK's storm-shelter warning; the last result is cached for offline use.
 - **NASA-STD-3001** (OCHMO technical briefs): cabin CO2 limits (3 mmHg 1-hour, 2.5 mmHg 7-day), radiation limits (250 mSv per event, 600 mSv career), sleep and nutrition figures.
 - **NASA communication-delay study for crewed Mars missions** and the **Earth-Independent Medical Operations** concept: the Earth-link delays and the overall design.

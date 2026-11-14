@@ -7,7 +7,7 @@
 - NASA Open Science Data Repository (OSDR) — https://osdr.nasa.gov
   - OSD-569, Inspiration4 complete blood count (`LSDS-7_Complete_Blood_Count_CBC_TRANSFORMED.csv`) — https://osdr.nasa.gov/bio/repo/data/studies/OSD-569
   - OSD-575, Inspiration4 comprehensive metabolic panel (`LSDS-8_Comprehensive_Metabolic_Panel_CMP_TRANSFORMED.csv`) — https://osdr.nasa.gov/bio/repo/data/studies/OSD-575
-  - OSD-656, Inspiration4 urine inflammation panel (reviewed, not charted) — https://osdr.nasa.gov/bio/repo/data/studies/OSD-656
+  - OSD-656, Inspiration4 urine inflammation panel (related data, not used in this version) — https://osdr.nasa.gov/bio/repo/data/studies/OSD-656
 - NASA DONKI, Space Weather Database Of Notifications, Knowledge, Information (via https://api.nasa.gov, public demo key)
 - NASA-STD-3001, OCHMO-TB-004 Carbon Dioxide — https://www.nasa.gov/ochmo-tb-004-carbon-dioxide-2/
 - NASA-STD-3001, OCHMO Radiation Protection technical brief — https://www.nasa.gov/wp-content/uploads/2023/03/radiation-protection-technical-brief-ochmo.pdf

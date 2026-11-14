@@ -42,7 +42,7 @@ The code is in `src/engine/` and is covered by unit tests on every NEWS2 boundar
 | NASA-STD-3001 (OCHMO technical briefs) | Cabin CO2 limits, radiation limits, sleep, nutrition |
 | NASA OSDR OSD-569 | Inspiration4 complete blood count, charted in "NASA data" |
 | NASA OSDR OSD-575 | Inspiration4 metabolic panel, charted in "NASA data" |
-| NASA OSDR OSD-656 | Inspiration4 urine inflammation panel: reviewed, not charted in this version |
+| NASA OSDR OSD-656 | Inspiration4 urine inflammation panel: identified as related data, not used in this version |
 | NASA DONKI | Live solar flares and CMEs in the Radiation zone |
 | NASA communication-delay study, EIMO concept | Earth-link delays and the "act first, report after" design |
 | Public ISS Medical Checklist (2016) | Structure of the SOS guide |
