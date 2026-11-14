@@ -1,8 +1,6 @@
 import type { CSSProperties, KeyboardEvent, ReactNode } from 'react'
-import type { EnvZoneId, Level, OrganId } from '../engine/types'
+import type { Level, ZoneId } from '../engine/types'
 import { LEVEL_UI, StatusIcon } from './level'
-
-export type ZoneId = OrganId | EnvZoneId
 
 export interface ZoneView {
   level: Level

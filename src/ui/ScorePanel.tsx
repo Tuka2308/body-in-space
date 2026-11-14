@@ -53,6 +53,11 @@ export function ScorePanel({ member, assessment, readings }: { member: CrewMembe
           </div>
         </div>
         <p className="mt-1 text-[0.95rem] text-dim">{scoreNote}</p>
+        {(assessment.news2.level === 'alert' || assessment.news2.singleRed) && (
+          <button className="tap tap-alert mt-3 w-full text-[1.1rem]" onClick={() => go('sos')}>
+            Open SOS guide for {member.name.split(' ')[0]}
+          </button>
+        )}
 
         {findings.length > 0 && (
           <ul className="mt-3 flex flex-col gap-1.5">

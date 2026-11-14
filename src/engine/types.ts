@@ -11,6 +11,7 @@ export type Consciousness = 'A' | 'C' | 'V' | 'P' | 'U'
 
 export type OrganId = 'brain' | 'eyes' | 'heart' | 'lungs' | 'blood' | 'bones' | 'skin'
 export type EnvZoneId = 'air' | 'radiation'
+export type ZoneId = OrganId | EnvZoneId
 
 /** Everything a crew member can measure or log. NEWS2 uses the first eight fields. */
 export interface Metrics {
