@@ -65,7 +65,7 @@ export function EarthLinkPanel() {
       </svg>
 
       {replied ? (
-        <div className="mt-1 rounded-xl border border-link bg-link-deep/40 p-3">
+        <div className="mt-1 rounded-[8px] border border-link bg-link-deep/40 p-3">
           <p className="label text-link">Reply from Earth, simulated</p>
           <p className="mt-0.5 text-[0.97rem] leading-snug">“Message received. Continue the onboard guide and send vital signs with every update.”</p>
         </div>

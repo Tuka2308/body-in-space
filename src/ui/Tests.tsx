@@ -135,7 +135,7 @@ function ReactionTest() {
       {(phase === 'wait' || phase === 'go' || phase === 'early') && (
         <button
           onPointerDown={tap}
-          className={`flex flex-1 flex-col items-center justify-center rounded-[20px] border-2 text-center transition-none ${
+          className={`flex flex-1 flex-col items-center justify-center rounded-[10px] border-2 text-center transition-none ${
             phase === 'go' ? 'border-ok bg-ok text-[#04130c]' : phase === 'early' ? 'border-caution bg-caution-deep' : 'border-line bg-void'
           }`}
         >
@@ -200,7 +200,7 @@ function AmslerTest() {
   return (
     <Shell title="Vision grid" note={`Amsler grid self-check for SANS screening. ${source('sans').label}.`} onBack={() => go('tests')}>
       <div className="grid min-h-0 flex-1 grid-cols-[auto_minmax(0,1fr)] gap-6">
-        <svg viewBox="0 0 100 100" className="aspect-square h-full max-h-full rounded-xl bg-[#f4f6fa]" role="img" aria-label="Amsler grid. Tap squares where lines look wavy, blurred or missing.">
+        <svg viewBox="0 0 100 100" className="aspect-square h-full max-h-full rounded-[8px] bg-[#f4f6fa]" role="img" aria-label="Amsler grid. Tap squares where lines look wavy, blurred or missing.">
           {Array.from({ length: GRID * GRID }, (_, i) => {
             const x = (i % GRID) * cell
             const y = Math.floor(i / GRID) * cell
@@ -224,7 +224,7 @@ function AmslerTest() {
                 key={option.label}
                 aria-pressed={option.on}
                 onClick={() => option.set(!option.on)}
-                className={`min-h-[64px] rounded-[14px] border px-3 text-left font-semibold ${option.on ? 'border-caution bg-caution-deep text-star' : 'border-line bg-panel text-dim'}`}
+                className={`min-h-[64px] rounded-[8px] border px-3 text-left font-semibold ${option.on ? 'border-caution bg-caution-deep text-star' : 'border-line bg-panel text-dim'}`}
                 style={{ fontStretch: '88%' }}
               >
                 {option.label}
@@ -372,7 +372,7 @@ function MoodTest() {
     <Shell title="Mood check" note="Private. Over the last 2 weeks, how often have you been bothered by the following?" onBack={() => go('tests')}>
       <ol className="scroll-quiet flex min-h-0 flex-1 flex-col gap-2 overflow-auto pr-1">
         {PHQ_ITEMS.map((item, i) => (
-          <li key={item} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] items-center gap-3 rounded-xl bg-panel px-3 py-2">
+          <li key={item} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] items-center gap-3 rounded-[8px] bg-panel px-3 py-2">
             <span className="text-[0.98rem] leading-snug">
               {i + 1}. {item}
             </span>
@@ -382,7 +382,7 @@ function MoodTest() {
                   key={label}
                   aria-pressed={answers[i] === value}
                   onClick={() => setAnswers((prev) => prev.map((a, j) => (j === i ? value : a)))}
-                  className={`min-h-[56px] rounded-xl border px-1 text-[0.82rem] font-semibold leading-tight ${answers[i] === value ? 'border-link bg-link-deep text-star' : 'border-line bg-raised text-dim'}`}
+                  className={`min-h-[56px] rounded-[8px] border px-1 text-[0.82rem] font-semibold leading-tight ${answers[i] === value ? 'border-link bg-link-deep text-star' : 'border-line bg-raised text-dim'}`}
                   style={{ fontStretch: '82%' }}
                 >
                   {label}

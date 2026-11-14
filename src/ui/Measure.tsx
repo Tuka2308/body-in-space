@@ -86,7 +86,7 @@ function Stepper({
   const button = (direction: 1 | -1) => (
     <button
       type="button"
-      className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-[14px] border border-line bg-raised active:scale-95"
+      className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-[8px] border border-line bg-raised active:scale-95"
       aria-label={`${direction === 1 ? 'Increase' : 'Decrease'} ${info.label}`}
       onPointerDown={(event) => {
         event.preventDefault()
@@ -109,7 +109,7 @@ function Stepper({
   return (
     <div
       ref={ref}
-      className={`rounded-[18px] border bg-hull p-3 transition-colors ${highlighted ? 'border-link' : 'border-line-soft'}`}
+      className={`rounded-[10px] border bg-hull p-3 transition-colors ${highlighted ? 'border-link' : 'border-line-soft'}`}
       role="group"
       aria-label={info.label}
     >
@@ -217,7 +217,7 @@ export function Measure({ focus }: { focus?: string }) {
           </div>
 
           <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-3">
-            <div className="rounded-[18px] border border-line-soft bg-hull p-3" role="group" aria-label="Breathing support">
+            <div className="rounded-[10px] border border-line-soft bg-hull p-3" role="group" aria-label="Breathing support">
               <span className="heading text-[1rem]">Breathing</span>
               <div className="mt-2 grid grid-cols-2 gap-2">
                 {[
@@ -229,7 +229,7 @@ export function Measure({ focus }: { focus?: string }) {
                     type="button"
                     aria-pressed={form.onO2 === option.on}
                     onClick={() => setForm((f) => ({ ...f, onO2: option.on }))}
-                    className={`min-h-[60px] rounded-[14px] border text-[0.98rem] font-semibold ${
+                    className={`min-h-[60px] rounded-[8px] border text-[0.98rem] font-semibold ${
                       form.onO2 === option.on ? 'border-link bg-link-deep text-star' : 'border-line bg-raised text-dim'
                     }`}
                     style={{ fontStretch: '86%' }}
@@ -239,7 +239,7 @@ export function Measure({ focus }: { focus?: string }) {
                 ))}
               </div>
             </div>
-            <div className="rounded-[18px] border border-line-soft bg-hull p-3" role="group" aria-label="Alertness">
+            <div className="rounded-[10px] border border-line-soft bg-hull p-3" role="group" aria-label="Alertness">
               <div className="flex items-baseline justify-between">
                 <span className="heading text-[1rem]">Alertness</span>
                 <span className="label text-[0.76rem]">speak, then tap the shoulder</span>
@@ -251,7 +251,7 @@ export function Measure({ focus }: { focus?: string }) {
                     type="button"
                     aria-pressed={form.consciousness === option.id}
                     onClick={() => setForm((f) => ({ ...f, consciousness: option.id }))}
-                    className={`min-h-[60px] rounded-[14px] border px-1 text-[0.93rem] font-semibold ${
+                    className={`min-h-[60px] rounded-[8px] border px-1 text-[0.93rem] font-semibold ${
                       form.consciousness === option.id
                         ? option.id === 'A'
                           ? 'border-link bg-link-deep text-star'

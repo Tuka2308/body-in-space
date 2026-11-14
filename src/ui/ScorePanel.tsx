@@ -30,8 +30,8 @@ export function ScorePanel({ member, assessment, readings }: { member: CrewMembe
       : assessment.news2.response
 
   return (
-    <section className="flex min-h-0 flex-col gap-3" aria-label={`Status of ${member.name}`}>
-      <div className="panel p-4">
+    <section className="flex min-h-0 flex-col gap-4" aria-label={`Status of ${member.name}`}>
+      <div className="pb-1">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <h2 className="heading truncate text-[1.3rem]">{member.name}</h2>
@@ -65,7 +65,7 @@ export function ScorePanel({ member, assessment, readings }: { member: CrewMembe
               <li key={`${finding.metric}-${finding.kind}`}>
                 <button
                   onClick={() => go(`organ/${finding.organ}`)}
-                  className="flex min-h-[48px] w-full items-center gap-2.5 rounded-xl border border-line-soft bg-panel px-3 py-2 text-left text-[0.93rem] hover:bg-raised"
+                  className="flex min-h-[48px] w-full items-center gap-2.5 rounded-[8px] border border-line-soft bg-panel px-3 py-2 text-left text-[0.93rem] hover:bg-raised"
                 >
                   <StatusIcon level={finding.level} size={20} />
                   <span>{finding.text}</span>
@@ -76,7 +76,7 @@ export function ScorePanel({ member, assessment, readings }: { member: CrewMembe
         )}
       </div>
 
-      <div className="panel px-4 pb-2 pt-3">
+      <div className="border-t border-line pt-3">
         <div className="flex items-baseline justify-between">
           <h3 className="label">NEWS2 score, last 24 h</h3>
           <span className="label text-[0.72rem] text-faint">Simulated</span>
@@ -100,11 +100,11 @@ export function ScorePanel({ member, assessment, readings }: { member: CrewMembe
         />
       </div>
 
-      <div className="panel flex min-h-0 flex-1 flex-col p-4">
+      <div className="flex min-h-0 flex-1 flex-col border-t border-line pt-3">
         <h3 className="label">Next for {member.name.split(' ')[0]}</h3>
         <ul className="scroll-quiet mt-2 flex min-h-0 flex-1 flex-col gap-1.5 overflow-auto">
           {tasks.slice(0, 3).map(({ def, dueAt, inMs }) => (
-            <li key={def.id} className="flex items-center justify-between gap-3 rounded-xl bg-panel px-3 py-2">
+            <li key={def.id} className="flex items-center justify-between gap-3 rounded-[8px] bg-panel px-3 py-2">
               <span className="text-[0.97rem]">{def.title}</span>
               <span className={`num shrink-0 text-[0.95rem] ${inMs < 0 ? 'text-caution' : 'text-dim'}`}>
                 {inMs < 0 ? `late ${durationText(-inMs)}` : inMs < 12 * HOUR ? `in ${durationText(inMs)}` : clockText(dueAt)}

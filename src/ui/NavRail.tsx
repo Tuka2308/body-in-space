@@ -30,8 +30,8 @@ export function NavRail() {
             key={item.route}
             onClick={() => go(item.route)}
             aria-current={active ? 'page' : undefined}
-            className={`flex h-[68px] w-[72px] flex-col items-center justify-center gap-1 rounded-[14px] text-[0.8rem] font-semibold transition-colors ${
-              active ? 'bg-link-deep text-star' : 'text-dim hover:bg-panel hover:text-star'
+            className={`flex h-[68px] w-[72px] flex-col items-center justify-center gap-1 rounded-[8px] text-[0.8rem] font-semibold transition-colors ${
+              active ? 'bg-raised text-star' : 'text-dim hover:bg-panel hover:text-star'
             }`}
             style={{ fontStretch: '84%' }}
           >

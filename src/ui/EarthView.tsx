@@ -63,7 +63,7 @@ export function EarthView() {
                   if (!a) return null
                   const ui = LEVEL_UI[a.overall]
                   return (
-                    <li key={member.id} className="flex items-center gap-2.5 rounded-xl bg-panel px-3 py-2.5">
+                    <li key={member.id} className="flex items-center gap-2.5 rounded-[8px] bg-panel px-3 py-2.5">
                       <StatusIcon level={a.overall} size={24} />
                       <span className="min-w-0 flex-1">
                         <span className="heading block truncate text-[1rem]">{member.name}</span>
@@ -85,13 +85,13 @@ export function EarthView() {
                   const here = arrived(message)
                   if (isEarth && !here) {
                     return (
-                      <li key={message.id} className="rounded-xl border border-dashed border-line px-3 py-2.5 text-dim">
+                      <li key={message.id} className="rounded-[8px] border border-dashed border-line px-3 py-2.5 text-dim">
                         A message is on its way. It arrives in <span className="num text-link">{countdownText(message.sentAt + message.delayMs - now)}</span>.
                       </li>
                     )
                   }
                   return (
-                    <li key={message.id} className="rounded-xl bg-panel px-3 py-2.5">
+                    <li key={message.id} className="rounded-[8px] bg-panel px-3 py-2.5">
                       <div className="flex items-baseline justify-between gap-3">
                         <span className="font-semibold">{message.title}</span>
                         <span className="num shrink-0 text-[0.9rem] text-dim">

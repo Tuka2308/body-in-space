@@ -163,7 +163,7 @@ function buildTiles(zone: ZoneId, a: Assessment, readings: Reading[], env: EnvSt
 function TileView({ tile }: { tile: Tile }) {
   const color = tile.level && tile.level !== 'ok' ? LEVEL_UI[tile.level].color : undefined
   return (
-    <div className="rounded-2xl border border-line-soft bg-panel px-3.5 py-3" style={color ? { borderColor: color } : undefined}>
+    <div className="rounded-[10px] border border-line-soft bg-panel px-3.5 py-3" style={color ? { borderColor: color } : undefined}>
       <div className="flex items-center justify-between gap-2">
         <span className="label">{tile.label}</span>
         {tile.level && <StatusIcon level={tile.level} size={20} />}
@@ -277,7 +277,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
                         key={key}
                         onClick={() => setChartKey(key)}
                         aria-pressed={key === activeKey}
-                        className={`min-h-[44px] rounded-xl border px-3 text-[0.9rem] font-semibold ${
+                        className={`min-h-[44px] rounded-[8px] border px-3 text-[0.9rem] font-semibold ${
                           key === activeKey ? 'border-link bg-link-deep text-star' : 'border-line text-dim hover:text-star'
                         }`}
                         style={{ fontStretch: '86%' }}
@@ -347,7 +347,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
               </li>
             ))}
             {hints.map((hint) => (
-              <li key={hint.text} className="rounded-xl border border-link-deep bg-link-deep/30 px-3 py-2 text-[0.93rem] leading-snug">
+              <li key={hint.text} className="rounded-[8px] border border-link-deep bg-link-deep/30 px-3 py-2 text-[0.93rem] leading-snug">
                 {hint.text}
                 <SourceLink id={hint.sourceId} />
               </li>
@@ -381,7 +381,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
               ))}
             </ul>
             {level !== 'ok' && (
-              <p className="rounded-xl bg-void/60 px-3 py-2 text-[0.9rem] leading-snug text-dim">
+              <p className="rounded-[8px] bg-void/60 px-3 py-2 text-[0.9rem] leading-snug text-dim">
                 {env.env.support} {link.live ? '' : `${link.reply}.`}
               </p>
             )}

@@ -8,8 +8,8 @@ export function CrewRail({ assessments }: { assessments: Record<string, Assessme
   const selectCrew = useApp((s) => s.selectCrew)
 
   return (
-    <section className="flex min-h-0 flex-col gap-2.5" aria-label="Crew">
-      <h2 className="label px-1">Crew of four</h2>
+    <section className="flex min-h-0 flex-col" aria-label="Crew">
+      <h2 className="label px-2 pb-2">Crew of four</h2>
       {CREW.map((member) => {
         const a = assessments[member.id]
         const ui = LEVEL_UI[a.overall]
@@ -19,8 +19,8 @@ export function CrewRail({ assessments }: { assessments: Record<string, Assessme
             key={member.id}
             onClick={() => selectCrew(member.id)}
             aria-pressed={active}
-            className={`flex min-h-[92px] items-center gap-3 rounded-[18px] border p-3 text-left transition-colors ${
-              active ? 'border-link bg-panel' : 'border-line-soft bg-hull hover:bg-panel'
+            className={`flex min-h-[92px] items-center gap-3 border-t border-line-soft px-2 py-3 text-left transition-colors first:border-t-0 ${
+              active ? 'rounded-[8px] border-transparent bg-raised' : 'hover:bg-hull'
             }`}
           >
             <span

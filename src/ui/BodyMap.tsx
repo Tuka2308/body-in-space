@@ -246,7 +246,7 @@ export function BodyMap({ zones, onOpen, heartRate, breathRate, scanKey }: Props
               onClick={() => onOpen(chip.id)}
               onKeyDown={onKey}
             >
-              <rect x={x} y={chip.y} width={CHIP_W} height={CHIP_H} rx="16" strokeDasharray={chip.id === 'radiation' ? '6 5' : undefined} />
+              <rect x={x} y={chip.y} width={CHIP_W} height={CHIP_H} rx="8" strokeDasharray={chip.id === 'radiation' ? '6 5' : undefined} />
               <StatusIcon level={zone.level} size={28} x={x + 13} y={chip.y + 22} />
               <text className="chip-title" x={x + 52} y={chip.y + 31}>
                 {chip.title}

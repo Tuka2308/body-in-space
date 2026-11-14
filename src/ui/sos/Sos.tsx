@@ -27,7 +27,7 @@ function LiveVitals({ crewId }: { crewId: string }) {
   const cell = (label: string, value: string, score: number) => {
     const level = score >= 3 ? 'alert' : score >= 1 ? 'caution' : 'ok'
     return (
-      <div className="rounded-xl bg-panel px-3 py-2">
+      <div className="rounded-[8px] bg-panel px-3 py-2">
         <div className="label text-[0.74rem]">{label}</div>
         <div className={`num text-[1.7rem] ${level === 'ok' ? '' : LEVEL_UI[level].text}`}>{value}</div>
       </div>
@@ -40,7 +40,7 @@ function LiveVitals({ crewId }: { crewId: string }) {
       {cell('Breaths /min', noPulse ? 'none' : String(m.rr), noPulse ? 3 : a.news2.parts.rr)}
       {cell('Pressure', noPulse ? '–' : `${m.sbp}/${m.dbp}`, noPulse ? 3 : a.news2.parts.sbp)}
       {noPulse ? (
-        <div className="rounded-xl bg-alert-deep px-3 py-2">
+        <div className="rounded-[8px] bg-alert-deep px-3 py-2">
           <div className="label text-[0.74rem]">Confirmed by crew</div>
           <div className="num flex items-center gap-2 text-[1.7rem] text-alert">
             <StatusIcon level="alert" size={22} />
@@ -48,7 +48,7 @@ function LiveVitals({ crewId }: { crewId: string }) {
           </div>
         </div>
       ) : (
-        <div className="rounded-xl px-3 py-2" style={{ background: ui.deep }}>
+        <div className="rounded-[8px] px-3 py-2" style={{ background: ui.deep }}>
           <div className="label text-[0.74rem]">NEWS2, simulated feed</div>
           <div className={`num flex items-center gap-2 text-[1.7rem] ${ui.text}`}>
             <StatusIcon level={a.news2.level} size={22} />
@@ -250,14 +250,14 @@ function CprPanel({ onPulseBack, onEnd }: { onPulseBack: () => void; onEnd: () =
         </div>
 
         {phase === 'aed' ? (
-          <div className="rounded-2xl border border-caution bg-caution-deep/50 p-3">
+          <div className="rounded-[10px] border border-caution bg-caution-deep/50 p-3">
             <p className="text-[1.05rem] font-semibold">Attach the AED pads and follow its voice prompts. Swap rescuers if you can.</p>
             <button className="tap tap-primary mt-2 h-[68px] w-full text-[1.2rem]" onClick={afterAed}>
               AED done, continue CPR
             </button>
           </div>
         ) : (
-          <div className="rounded-2xl border border-line-soft bg-panel p-3 text-[0.9rem]">
+          <div className="rounded-[10px] border border-line-soft bg-panel p-3 text-[0.9rem]">
             <p className="label">Stop only when all three are true</p>
             <ul className="mt-1 flex flex-col gap-0.5">
               {STOP_CRITERIA.map((criterion) => (
@@ -286,7 +286,7 @@ function CprPanel({ onPulseBack, onEnd }: { onPulseBack: () => void; onEnd: () =
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl bg-panel px-3 py-2">
+    <div className="rounded-[8px] bg-panel px-3 py-2">
       <div className="label text-[0.74rem]">{label}</div>
       <div className="num text-[1.6rem]">{value}</div>
     </div>
@@ -332,7 +332,7 @@ function Report({ patientId }: { patientId: string }) {
       </pre>
       <div className="grid grid-cols-2 gap-3">
         {sos.reportSent ? (
-          <div className="flex items-center gap-3 rounded-[14px] border border-link bg-link-deep/40 px-4 text-[1.05rem]">
+          <div className="flex items-center gap-3 rounded-[8px] border border-link bg-link-deep/40 px-4 text-[1.05rem]">
             <StatusIcon level="ok" size={24} />
             {env.linkOneWayS === 0 ? 'Report sent to Mission Control.' : `Report queued. It reaches Earth in ${durationText(delayMs)}.`}
           </div>
@@ -432,7 +432,7 @@ export function Sos() {
         </div>
         {sos.branch === 'ask' ? (
           <button
-            className="min-h-[56px] rounded-[14px] border-2 border-[#190308]/40 px-4 font-semibold"
+            className="min-h-[56px] rounded-[8px] border-2 border-[#190308]/40 px-4 font-semibold"
             onClick={() => {
               sos.close()
               go('')
@@ -443,7 +443,7 @@ export function Sos() {
         ) : (
           sos.branch !== 'report' && (
             <button
-              className="min-h-[56px] rounded-[14px] border-2 border-[#190308]/40 px-4 font-semibold"
+              className="min-h-[56px] rounded-[8px] border-2 border-[#190308]/40 px-4 font-semibold"
               onClick={() => {
                 sos.addLog('Emergency guide ended by crew')
                 sos.goTo('report')
@@ -470,7 +470,7 @@ export function Sos() {
                     key={member.id}
                     onClick={() => sos.setPatient(member.id)}
                     aria-pressed={member.id === patientId}
-                    className={`min-h-[56px] rounded-[14px] border px-4 font-semibold ${
+                    className={`min-h-[56px] rounded-[8px] border px-4 font-semibold ${
                       member.id === patientId ? 'border-star bg-raised text-star' : 'border-line text-dim'
                     }`}
                     style={{ fontStretch: '86%' }}
@@ -520,7 +520,7 @@ export function Sos() {
                   {step.widget === 'kit' && (
                     <ul className="grid grid-cols-3 gap-2">
                       {KIT_ITEMS.map((item) => (
-                        <li key={item.name} className="rounded-xl bg-panel px-3 py-2.5">
+                        <li key={item.name} className="rounded-[8px] bg-panel px-3 py-2.5">
                           <div className="font-semibold">{item.name}</div>
                           <div className="text-[0.9rem] text-dim">{item.where}</div>
                         </li>

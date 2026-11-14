@@ -31,8 +31,8 @@
   --color-alert: #ff4d5e;
   --color-alert-deep: #521821;
 
-  --radius-control: 14px;
-  --radius-panel: 20px;
+  --radius-control: 8px;
+  --radius-panel: 10px;
 }
 
 @layer base {
@@ -53,6 +53,11 @@
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior: none;
+  }
+
+  input,
+  textarea {
+    caret-color: var(--color-star);
   }
 
   button {
@@ -100,7 +105,7 @@
 
   .panel {
     background: var(--color-hull);
-    border: 1px solid var(--color-line-soft);
+    border: 1px solid transparent;
     border-radius: var(--radius-panel);
   }
 
@@ -130,12 +135,12 @@
     transform: scale(0.98);
   }
   .tap-primary {
-    background: var(--color-link);
-    border-color: var(--color-link);
+    background: var(--color-star);
+    border-color: var(--color-star);
     color: #0a1024;
   }
   .tap-primary:hover {
-    background: #a5baff;
+    background: #ffffff;
   }
   .tap-alert {
     background: var(--color-alert);
@@ -148,7 +153,7 @@
 
   /* A changed score lands with a short settle, so the eye catches the recalculation. */
   .score-pop {
-    animation: score-pop 520ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    animation: score-pop 420ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .cpr-beat {

@@ -84,7 +84,7 @@ export function Missions() {
                       </span>
                     ) : (
                       <button
-                        className={`min-h-[48px] rounded-xl border px-3 text-[0.85rem] font-semibold ${task.at < timeOfDay ? 'border-caution text-caution' : 'border-line text-dim'}`}
+                        className={`min-h-[48px] rounded-[8px] border px-3 text-[0.85rem] font-semibold ${task.at < timeOfDay ? 'border-caution text-caution' : 'border-line text-dim'}`}
                         style={{ fontStretch: '86%' }}
                         onClick={() => {
                           selectCrew(member.id)

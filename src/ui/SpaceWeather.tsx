@@ -38,7 +38,7 @@ export function SpaceWeather() {
       <p className="label">{statusLine}</p>
 
       {active && (
-        <p className="flex items-center gap-2.5 rounded-xl border border-caution bg-caution-deep/50 px-3 py-2.5 text-[1.05rem] font-semibold">
+        <p className="flex items-center gap-2.5 rounded-[8px] border border-caution bg-caution-deep/50 px-3 py-2.5 text-[1.05rem] font-semibold">
           <StatusIcon level="caution" size={24} />
           Solar event detected — go to storm shelter. {active.kind}, {active.detail}.
         </p>
@@ -46,7 +46,7 @@ export function SpaceWeather() {
 
       <ul className="scroll-quiet flex min-h-0 flex-1 flex-col gap-1.5 overflow-auto">
         {donki.events.slice(0, 6).map((event) => (
-          <li key={event.id} className="flex items-center justify-between gap-3 rounded-xl bg-panel px-3 py-2 text-[0.93rem]">
+          <li key={event.id} className="flex items-center justify-between gap-3 rounded-[8px] bg-panel px-3 py-2 text-[0.93rem]">
             <span>
               <span className="font-semibold">{event.kind}</span>
               <span className="text-dim">, {event.detail}</span>

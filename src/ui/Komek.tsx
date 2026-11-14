@@ -40,12 +40,12 @@ function runAction(action: KomekAction) {
 
 function Bubble({ message }: { message: KomekMessage }) {
   if (message.from === 'crew') {
-    return <div className="ml-10 self-end rounded-2xl rounded-br-md bg-link-deep px-3.5 py-2 text-[0.97rem]">{message.text}</div>
+    return <div className="ml-10 self-end rounded-[10px] rounded-br-[2px] bg-link-deep px-3.5 py-2 text-[0.97rem]">{message.text}</div>
   }
   const flagged = message.level && message.level !== 'ok'
   return (
     <div
-      className="mr-6 self-start rounded-2xl rounded-bl-md border bg-panel px-3.5 py-2.5 text-[0.97rem] leading-snug"
+      className="mr-6 self-start rounded-[10px] rounded-bl-[2px] border bg-panel px-3.5 py-2.5 text-[0.97rem] leading-snug"
       style={{ borderColor: flagged ? LEVEL_UI[message.level!].color : 'var(--color-line-soft)' }}
     >
       {message.text}
@@ -59,7 +59,7 @@ function Bubble({ message }: { message: KomekMessage }) {
           {message.actions.map((action) => (
             <button
               key={action.label}
-              className={`min-h-[46px] rounded-xl px-3.5 text-[0.95rem] font-semibold ${action.route === 'sos' ? 'bg-alert text-[#190308]' : 'border border-link text-link'}`}
+              className={`min-h-[46px] rounded-[8px] px-3.5 text-[0.95rem] font-semibold ${action.route === 'sos' ? 'bg-alert text-[#190308]' : 'border border-link text-link'}`}
               style={{ fontStretch: '88%' }}
               onClick={() => runAction(action)}
             >
@@ -210,7 +210,10 @@ function useKomekWatcher() {
 export function Komek() {
   useKomekWatcher()
   const komek = useKomek()
-  const [view = ''] = useRoute()
+  const route = useRoute()
+  const [view = ''] = route
+  // A message that only points at the screen already open would just cover it.
+  const toastIsHere = komek.toast?.actions?.some((a) => a.route !== undefined && a.route === route.join('/')) ?? false
   const assessments = useAllAssessments()
   const selectedId = useApp((s) => s.selectedCrewId)
   const sos = useSos()
@@ -227,7 +230,7 @@ export function Komek() {
   // Quiet messages fade on their own; warnings stay until answered.
   useEffect(() => {
     if (!komek.toast || komek.toast.level === 'alert') return
-    const timer = window.setTimeout(() => useKomek.getState().dismissToast(), 12000)
+    const timer = window.setTimeout(() => useKomek.getState().dismissToast(), 8000)
     return () => window.clearTimeout(timer)
   }, [komek.toast])
 
@@ -259,7 +262,7 @@ export function Komek() {
   return (
     <div className="pointer-events-none fixed bottom-[46px] right-4 z-40 flex flex-col items-end gap-2 [&>*]:pointer-events-auto">
       {komek.open && (
-        <section className="flex h-[min(560px,calc(100vh-150px))] w-[min(410px,calc(100vw-32px))] flex-col overflow-hidden rounded-[22px] border border-line bg-hull shadow-[0_18px_60px_rgba(0,0,0,0.6)]" aria-label="KOMEK, onboard SI assistant">
+        <section className="flex h-[min(560px,calc(100vh-150px))] w-[min(410px,calc(100vw-32px))] flex-col overflow-hidden rounded-[10px] border border-line bg-hull shadow-[0_18px_60px_rgba(0,0,0,0.6)]" aria-label="KOMEK, onboard SI assistant">
           <header className="flex items-center gap-3 border-b border-line-soft px-3.5 py-2.5">
             <KomekGlyph size={38} level={level} />
             <div className="min-w-0 flex-1 leading-tight">
@@ -294,7 +297,7 @@ export function Komek() {
               onChange={(event) => setDraft(event.target.value)}
               placeholder="Ask: what is SpO2?"
               aria-label="Ask KOMEK a question"
-              className="min-h-[52px] min-w-0 flex-1 rounded-[14px] border border-line bg-void px-3.5 text-[1rem] text-star placeholder:text-faint focus:border-link focus:outline-none"
+              className="min-h-[52px] min-w-0 flex-1 rounded-[8px] border border-line bg-void px-3.5 text-[1rem] text-star placeholder:text-faint focus:border-link focus:outline-none"
             />
             <button type="submit" className="tap tap-primary min-h-[52px] min-w-[56px] px-0" aria-label="Send question">
               <SendIcon size={22} />
@@ -303,9 +306,9 @@ export function Komek() {
         </section>
       )}
 
-      {!komek.open && komek.toast && (
+      {!komek.open && komek.toast && !toastIsHere && (
         <div
-          className="komek-toast w-[min(340px,calc(100vw-32px))] rounded-2xl rounded-br-md border bg-hull px-3.5 py-3 text-[0.97rem] leading-snug shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
+          className="komek-toast w-[min(340px,calc(100vw-32px))] rounded-[10px] rounded-br-[2px] border bg-hull px-3.5 py-3 text-[0.97rem] leading-snug shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
           style={{ borderColor: komek.toast.level && komek.toast.level !== 'ok' ? LEVEL_UI[komek.toast.level].color : 'var(--color-line)' }}
           role="status"
         >
@@ -320,7 +323,7 @@ export function Komek() {
               {komek.toast.actions.map((action) => (
                 <button
                   key={action.label}
-                  className={`min-h-[46px] rounded-xl px-3.5 text-[0.95rem] font-semibold ${action.route === 'sos' ? 'bg-alert text-[#190308]' : 'border border-link text-link'}`}
+                  className={`min-h-[46px] rounded-[8px] px-3.5 text-[0.95rem] font-semibold ${action.route === 'sos' ? 'bg-alert text-[#190308]' : 'border border-link text-link'}`}
                   style={{ fontStretch: '88%' }}
                   onClick={() => runAction(action)}
                 >

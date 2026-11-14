@@ -46,11 +46,11 @@ export function Dashboard() {
   const link = linkText(envStatus.env)
 
   return (
-    <div className="grid h-full min-h-0 grid-cols-[clamp(216px,17vw,270px)_minmax(0,1fr)_clamp(300px,24vw,380px)] gap-3 p-3">
+    <div className="grid h-full min-h-0 grid-cols-[clamp(216px,17vw,270px)_minmax(0,1fr)_clamp(300px,24vw,380px)] gap-5 p-4">
       <CrewRail assessments={assessments} />
 
-      <section className="panel relative flex min-h-0 flex-col overflow-hidden" aria-label={`Body map of ${member.name}`}>
-        <span className="label pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 rounded-full border border-line bg-hull px-2.5 py-0.5">
+      <section className="relative flex min-h-0 flex-col overflow-hidden" aria-label={`Body map of ${member.name}`}>
+        <span className="label pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 rounded-full border border-line bg-void px-2.5 py-0.5">
           Simulated live feed
         </span>
         <div className="min-h-0 flex-1 px-2 pt-1">
@@ -62,16 +62,16 @@ export function Dashboard() {
             scanKey={selectedId}
           />
         </div>
-        <dl className="grid grid-cols-3 gap-px border-t border-line-soft bg-line-soft text-[0.9rem]">
-          <div className="bg-hull px-4 py-2">
+        <dl className="grid grid-cols-3 border-t border-line text-[0.9rem]">
+          <div className="px-4 py-2">
             <dt className="label">If you call {envStatus.env.linkTarget ?? 'Earth'}</dt>
             <dd className="font-medium">{link.reply}</dd>
           </div>
-          <div className="bg-hull px-4 py-2">
+          <div className="px-4 py-2">
             <dt className="label">Evacuation</dt>
             <dd className={`font-medium ${envStatus.env.evacPossible ? '' : 'text-caution'}`}>{envStatus.env.evacuation}</dd>
           </div>
-          <div className="bg-hull px-4 py-2">
+          <div className="px-4 py-2">
             <dt className="label">Gravity and dose rate</dt>
             <dd className="font-medium">
               {envStatus.env.gravity}, {envStatus.env.doseRateMsvDay} mSv/day{envStatus.env.doseIsReference ? ' (reference value)' : ''}
