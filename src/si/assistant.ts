@@ -56,7 +56,7 @@ export function allFindings(a: Assessment): Finding[] {
 export function linkSentence(env: Environment): string {
   if (env.linkOneWayS === 0) return 'Mission Control is live, so a flight surgeon can answer right away.'
   const oneWay = env.linkOneWayS * SEC
-  return `A message reaches Earth in ${durationText(oneWay)}. The earliest reply is in ${durationText(oneWay * 2)}.`
+  return `A message reaches ${env.linkTarget ?? 'Earth'} in ${durationText(oneWay)}. The earliest reply is in ${durationText(oneWay * 2)}.`
 }
 
 export function explainStatus(ctx: KomekContext): KomekReply {

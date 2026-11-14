@@ -1,6 +1,6 @@
 import type { SourceId } from './sources'
 
-export type EnvId = 'iss' | 'moon' | 'transit' | 'mars'
+export type EnvId = 'iss' | 'moon' | 'transit' | 'mars' | 'clinic'
 
 export interface Environment {
   id: EnvId
@@ -21,6 +21,8 @@ export interface Environment {
   doseSource: SourceId
   /** True when our research has no verified figure and the value is a labelled placeholder. */
   doseIsReference: boolean
+  /** Who is at the far end of the link. Earth for a spacecraft, a doctor for a remote clinic. */
+  linkTarget?: string
   /** Simulated cabin CO2 partial pressure, mmHg. */
   co2HourMean: number
   co2WeekMean: number
@@ -101,14 +103,38 @@ export const ENVIRONMENTS: Record<EnvId, Environment> = {
     co2HourMean: 2.2,
     co2WeekMean: 2.4,
   },
+  /**
+   * The same tool on Earth: a paramedic in a remote village with no doctor nearby.
+   * Every figure in this preset is illustrative, chosen by the team, not measured.
+   */
+  clinic: {
+    id: 'clinic',
+    name: 'Remote clinic on Earth',
+    short: 'Remote clinic',
+    linkOneWayS: 90 * 60,
+    linkNote: 'Illustrative figure: no mobile coverage, the nearest doctor answers by radio relay in about 90 minutes.',
+    support: 'The district doctor cannot answer in time. Act on the guide first, then report.',
+    evacPossible: true,
+    evacuation: 'Hospital transfer takes hours (illustrative)',
+    gravity: '1 g',
+    microgravity: false,
+    doseRateMsvDay: 0,
+    doseNote: 'Background radiation only. Not tracked in this preset.',
+    doseSource: 'radiation',
+    doseIsReference: true,
+    linkTarget: 'the doctor',
+    co2HourMean: 0.7,
+    co2WeekMean: 0.7,
+  },
 }
 
-export const ENV_ORDER: EnvId[] = ['iss', 'moon', 'transit', 'mars']
+export const ENV_ORDER: EnvId[] = ['iss', 'moon', 'transit', 'mars', 'clinic']
 
 /** Leg bone loss in microgravity, percent per month (Stavnichuk et al. 2020). */
 export const BONE_LOSS_PCT_PER_MONTH = 0.8
 
 export function boneLossEstimate(env: Environment, missionDayNumber: number): { pct: number; isReference: boolean } {
+  if (env.id === 'clinic') return { pct: 0, isReference: false }
   const pct = BONE_LOSS_PCT_PER_MONTH * (missionDayNumber / 30)
   // No human data exists for partial gravity: the microgravity rate is shown as an upper-bound reference.
   return { pct, isReference: !env.microgravity }

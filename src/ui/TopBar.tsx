@@ -27,7 +27,7 @@ export function TopBar() {
               key={id}
               onClick={() => setEnv(id)}
               aria-pressed={active}
-              className={`min-h-[52px] rounded-[12px] px-4 text-[0.98rem] font-semibold transition-colors ${
+              className={`min-h-[52px] rounded-[12px] px-3 text-[0.95rem] font-semibold transition-colors ${
                 active ? 'bg-link text-[#0a1024]' : 'text-dim hover:text-star'
               }`}
               style={{ fontStretch: '86%' }}

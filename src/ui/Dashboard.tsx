@@ -63,7 +63,7 @@ export function Dashboard() {
         </div>
         <dl className="grid grid-cols-3 gap-px border-t border-line-soft bg-line-soft text-[0.9rem]">
           <div className="bg-hull px-4 py-2">
-            <dt className="label">If you call Earth</dt>
+            <dt className="label">If you call {envStatus.env.linkTarget ?? 'Earth'}</dt>
             <dd className="font-medium">{link.reply}</dd>
           </div>
           <div className="bg-hull px-4 py-2">

@@ -10,7 +10,9 @@ import { create } from 'zustand'
 const API = 'https://api.nasa.gov/DONKI'
 const KEY = 'DEMO_KEY'
 const CACHE_KEY = 'body-in-space-donki-v1'
+const TRY_KEY = 'body-in-space-donki-try'
 const REFRESH_MS = 60 * 60 * 1000
+const RETRY_MS = 10 * 60 * 1000
 const DAY_MS = 24 * 60 * 60 * 1000
 
 export interface SolarEvent {
@@ -109,6 +111,17 @@ export const useDonki = create<DonkiState>()((set, get) => ({
     const state = get()
     if (state.status === 'loading') return
     if (state.fetchedAt && Date.now() - state.fetchedAt < REFRESH_MS && state.status === 'live') return
+    // After a failed attempt, wait before asking again: the public demo key is rate-limited.
+    try {
+      const lastTry = Number(localStorage.getItem(TRY_KEY) ?? 0)
+      if (Date.now() - lastTry < RETRY_MS) {
+        set({ status: state.events.length > 0 ? 'cached' : 'unavailable' })
+        return
+      }
+      localStorage.setItem(TRY_KEY, String(Date.now()))
+    } catch {
+      // No storage: just try.
+    }
     set({ status: 'loading' })
     const [flr, cme] = await Promise.allSettled([getJson('FLR'), getJson('CME')])
     if (flr.status === 'rejected' && cme.status === 'rejected') {

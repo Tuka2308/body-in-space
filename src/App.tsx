@@ -5,6 +5,7 @@ import { Dashboard } from './ui/Dashboard'
 import { Komek } from './ui/Komek'
 import { Lab } from './ui/Lab'
 import { Measure } from './ui/Measure'
+import { Missions } from './ui/Missions'
 import { OrganCard, isZone } from './ui/OrganCard'
 import { NavRail } from './ui/NavRail'
 import { Sos } from './ui/sos/Sos'
@@ -57,6 +58,8 @@ export function App() {
             <main className="min-w-0 flex-1">
               {view === 'organ' && isZone(param) ? (
                 <OrganCard key={param} zone={param} />
+              ) : view === 'missions' ? (
+                <Missions />
               ) : view === 'lab' ? (
                 <Lab />
               ) : view === 'tests' ? (

@@ -26,7 +26,7 @@ export function EarthLink({ env }: { env: Environment }) {
         </circle>
       </svg>
       <div className="leading-tight">
-        <div className="label">Earth link, one way</div>
+        <div className="label">{env.linkTarget ? `Link to ${env.linkTarget}, one way` : 'Earth link, one way'}</div>
         <div className="num text-[1.45rem] text-link">{text.oneWay}</div>
       </div>
     </div>

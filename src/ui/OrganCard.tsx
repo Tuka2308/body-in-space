@@ -135,7 +135,9 @@ function buildTiles(zone: ZoneId, a: Assessment, readings: Reading[], env: EnvSt
           value: env.boneLoss.pct.toFixed(1),
           unit: '%',
           notes: [
-            env.boneLoss.isReference
+            env.env.id === 'clinic'
+              ? 'Normal gravity: no spaceflight bone loss'
+              : env.boneLoss.isReference
               ? `Reference estimate. No human data exists for ${env.env.gravity}; the microgravity rate is shown as an upper bound`
               : `Day ${day} at 0.8% a month`,
           ],
