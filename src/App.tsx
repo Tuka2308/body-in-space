@@ -7,6 +7,7 @@ import { Measure } from './ui/Measure'
 import { OrganCard, isZone } from './ui/OrganCard'
 import { NavRail } from './ui/NavRail'
 import { Sos } from './ui/sos/Sos'
+import { Tests } from './ui/Tests'
 import { TopBar } from './ui/TopBar'
 
 export function App() {
@@ -55,6 +56,8 @@ export function App() {
             <main className="min-w-0 flex-1">
               {view === 'organ' && isZone(param) ? (
                 <OrganCard key={param} zone={param} />
+              ) : view === 'tests' ? (
+                <Tests key={param ?? 'menu'} test={param} />
               ) : view === 'measure' ? (
                 <Measure key={param ?? 'all'} focus={param} />
               ) : (

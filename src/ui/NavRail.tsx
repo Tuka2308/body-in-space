@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { go, useRoute } from '../state/route'
-import { CrewIcon, MeasureIcon } from './icons'
+import { CrewIcon, MeasureIcon, TestsIcon } from './icons'
 
 interface NavItem {
   route: string
@@ -13,6 +13,7 @@ interface NavItem {
 const ITEMS: NavItem[] = [
   { route: '', label: 'Crew', icon: <CrewIcon />, also: ['organ'] },
   { route: 'measure', label: 'Measure', icon: <MeasureIcon /> },
+  { route: 'tests', label: 'Self-tests', icon: <TestsIcon /> },
 ]
 
 export function NavRail() {
