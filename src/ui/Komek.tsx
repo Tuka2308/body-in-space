@@ -206,8 +206,8 @@ export function Komek() {
 
   // Quiet messages fade on their own; warnings stay until answered.
   useEffect(() => {
-    if (!komek.toast || (komek.toast.level && komek.toast.level !== 'ok')) return
-    const timer = window.setTimeout(() => useKomek.getState().dismissToast(), 9000)
+    if (!komek.toast || komek.toast.level === 'alert') return
+    const timer = window.setTimeout(() => useKomek.getState().dismissToast(), 12000)
     return () => window.clearTimeout(timer)
   }, [komek.toast])
 

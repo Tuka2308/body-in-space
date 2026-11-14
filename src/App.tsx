@@ -3,6 +3,7 @@ import { go, useRoute } from './state/route'
 import { resetDemo, useApp } from './state/store'
 import { Dashboard } from './ui/Dashboard'
 import { Komek } from './ui/Komek'
+import { Lab } from './ui/Lab'
 import { Measure } from './ui/Measure'
 import { OrganCard, isZone } from './ui/OrganCard'
 import { NavRail } from './ui/NavRail'
@@ -56,6 +57,8 @@ export function App() {
             <main className="min-w-0 flex-1">
               {view === 'organ' && isZone(param) ? (
                 <OrganCard key={param} zone={param} />
+              ) : view === 'lab' ? (
+                <Lab />
               ) : view === 'tests' ? (
                 <Tests key={param ?? 'menu'} test={param} />
               ) : view === 'measure' ? (
