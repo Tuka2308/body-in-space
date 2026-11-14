@@ -14,6 +14,8 @@ interface Props {
   /** Beats and breaths per minute drive the heart and lung motion. */
   heartRate: number
   breathRate: number
+  /** Changes when another crew member is shown; restarts the scan sweep. */
+  scanKey?: string
 }
 
 const W = 736
@@ -46,13 +48,14 @@ const CHIPS: ChipDef[] = [
 
 // Right half of the silhouette (viewer's right); the left half is its mirror image.
 const HALF_OUTLINE =
-  'M392 138 C392 146 393 152 394 157 C398 163 406 166 416 169 C430 173 444 176 454 181 C470 187 483 200 487 220 C490 250 492 280 494 306 C500 332 506 370 508 404 C512 418 514 440 509 456 C505 468 494 474 488 466 C484 458 486 440 484 424 C481 384 474 352 470 322 C466 296 462 268 458 246 C457 274 451 302 447 330 C444 350 446 366 452 384 C458 400 462 424 462 448 C462 490 456 530 450 562 C454 590 454 620 448 650 C446 664 444 676 444 684 C446 694 454 700 456 706 C456 712 440 712 420 712 L408 712 C404 704 406 692 407 684 C408 650 410 610 406 580 C404 570 404 560 405 552 C404 520 398 486 390 462 C388 456 384 452 380 452'
-const HALF_FILL = `M380 138 ${HALF_OUTLINE.slice(1)} Z`
+  'M396 136 C396 146 397 152 398 157 C402 163 409 166 418 169 C430 173 444 176 454 181 C470 187 483 200 487 220 C490 250 492 280 494 306 C500 332 506 370 508 404 C511 414 516 428 515 444 C514 458 508 472 499 474 C492 475 488 468 488 458 C488 450 487 440 485 432 C484 428 484 426 484 424 C481 384 474 352 470 322 C466 296 462 268 458 246 C457 274 451 302 447 330 C444 350 446 366 452 384 C458 400 462 424 462 448 C462 490 456 530 450 562 C454 590 454 620 448 650 C446 664 444 676 444 684 C446 694 454 700 456 706 C456 712 440 712 420 712 L408 712 C404 704 406 692 407 684 C408 650 410 610 406 580 C404 570 404 560 405 552 C404 520 398 486 390 462 C388 456 384 452 380 452'
+const HALF_FILL = `M380 136 ${HALF_OUTLINE.slice(1)} Z`
 // Half of the head, from the crown down the jaw to the chin.
-const HALF_HEAD = 'M380 48 C403 48 417 66 417 92 C417 104 414 114 409 123 C403 134 393 143 380 144'
+const HALF_HEAD = 'M380 46 C404 46 419 64 419 90 C419 102 417 112 412 122 C406 134 394 143 380 144'
+const HALF_EAR = 'M419 85 C426 83 428 92 426 100 C425 105 421 108 417 106'
 // Quiet anatomical hints: collarbone, chest, ribs, hip line, knee.
 const HALF_DETAIL =
-  'M386 173 C402 168 424 171 444 180 M380 204 C398 214 428 214 448 232 M388 296 C408 300 432 292 446 270 M390 322 C408 324 430 316 444 300 M380 432 C402 428 436 410 454 384 M414 556 C422 548 436 548 444 556'
+  'M386 173 C402 168 424 171 444 180 M380 204 C398 214 428 214 448 232 M388 296 C408 300 432 292 446 270 M390 322 C408 324 430 316 444 300 M380 432 C402 428 436 410 454 384 M414 556 C422 548 436 548 444 556 M487 432 C481 440 479 450 482 458 M398 150 C404 158 412 164 424 168 M412 700 C424 696 440 698 450 704'
 
 const zoneStyle = (level: Level): CSSProperties => ({ '--z': LEVEL_UI[level].color }) as CSSProperties
 
@@ -86,7 +89,7 @@ function Zone({
   )
 }
 
-export function BodyMap({ zones, onOpen, heartRate, breathRate }: Props) {
+export function BodyMap({ zones, onOpen, heartRate, breathRate, scanKey }: Props) {
   // Quantise so the animation speed does not twitch with every live sample.
   const beat = 60 / Math.max(30, Math.round(heartRate / 4) * 4)
   const breath = 60 / Math.max(6, Math.round(breathRate / 2) * 2)
@@ -103,6 +106,17 @@ export function BodyMap({ zones, onOpen, heartRate, breathRate }: Props) {
           <stop offset="0" stopColor="#8ea8ff" stopOpacity="0.1" />
           <stop offset="1" stopColor="#8ea8ff" stopOpacity="0" />
         </radialGradient>
+        <linearGradient id="body-scan" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8ea8ff" stopOpacity="0" />
+          <stop offset="0.8" stopColor="#8ea8ff" stopOpacity="0.45" />
+          <stop offset="1" stopColor="#e8eef7" stopOpacity="0.9" />
+        </linearGradient>
+        <clipPath id="body-clip">
+          <path d={HALF_FILL} />
+          <path d={HALF_FILL} transform="translate(760 0) scale(-1 1)" />
+          <path d={`${HALF_HEAD} Z`} />
+          <path d={`${HALF_HEAD} Z`} transform="translate(760 0) scale(-1 1)" />
+        </clipPath>
       </defs>
 
       {/* The crew member inside their environment: cabin air (solid ring) and radiation (dashed ring). */}
@@ -123,6 +137,10 @@ export function BodyMap({ zones, onOpen, heartRate, breathRate }: Props) {
           <path d="M380 176V300" />
           <circle cx="380" cy="388" r="2" />
         </g>
+        {/* One sweep of light each time a different crew member is shown. */}
+        <g clipPath="url(#body-clip)">
+          <rect key={scanKey} className="body-scan" x="240" y="0" width="280" height="34" fill="url(#body-scan)" />
+        </g>
       </g>
       <g
         className={`zone zone-outline zone-${zones.skin.level}`}
@@ -136,6 +154,8 @@ export function BodyMap({ zones, onOpen, heartRate, breathRate }: Props) {
         <path className="draw" pathLength={1} d={HALF_OUTLINE} transform="translate(760 0) scale(-1 1)" />
         <path className="draw" pathLength={1} d={HALF_HEAD} />
         <path className="draw" pathLength={1} d={HALF_HEAD} transform="translate(760 0) scale(-1 1)" />
+        <path className="draw" pathLength={1} d={HALF_EAR} />
+        <path className="draw" pathLength={1} d={HALF_EAR} transform="translate(760 0) scale(-1 1)" />
       </g>
 
       <Zone id="brain" level={zones.brain.level} label={label('brain', 'Brain and mind')} onOpen={onOpen} hit={<ellipse cx="380" cy="76" rx="40" ry="30" />}>

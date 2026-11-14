@@ -59,6 +59,7 @@ export function Dashboard() {
             onOpen={(id) => go(`organ/${id}`)}
             heartRate={assessment.metrics.hr ?? 70}
             breathRate={assessment.metrics.rr ?? 15}
+            scanKey={selectedId}
           />
         </div>
         <dl className="grid grid-cols-3 gap-px border-t border-line-soft bg-line-soft text-[0.9rem]">

@@ -231,6 +231,11 @@
 .zone-outline > path {
   vector-effect: non-scaling-stroke;
 }
+.body-scan {
+  pointer-events: none;
+  opacity: 0;
+  animation: body-scan 1.5s cubic-bezier(0.4, 0, 0.3, 1) 250ms 1 both;
+}
 .body-detail {
   pointer-events: none;
 }
@@ -349,6 +354,23 @@
   to {
     transform: none;
     opacity: 1;
+  }
+}
+
+@keyframes body-scan {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(700px);
+    opacity: 0;
   }
 }
 
