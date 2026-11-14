@@ -18,7 +18,7 @@ Halfway to Mars a question to a flight surgeon takes about 14 minutes to arrive 
 - **How / why / what to do.** Each zone shows how to measure it in microgravity, why it matters in space (every number with its source) and what to do for the current status.
 - **Space-NEWS2.** Our scoring method, described below.
 - **SOS guide.** One question ("Is the crewmate responsive?"), then one large instruction at a time. CPR metronome at 110 per minute with a 30:2 counter, AED reminder, stop criteria, and an Earth-link panel that counts down to the earliest possible reply. It ends with an automatic incident report.
-- **KOMEK, the onboard SI assistant.** Rule-based and fully offline. It warns when a status gets worse, reminds about due measurements and answers questions only from the project's checked knowledge base. It does not diagnose or prescribe; unknown questions are logged for the flight surgeon.
+- **KOMEK, the onboard SI assistant.** A small pixel-art robot that waits behind a ledge and climbs out when it has something to say. Rule-based and fully offline. It warns when a status gets worse, reminds about due measurements and answers questions only from the project's checked knowledge base. It does not diagnose or prescribe; unknown questions are logged for the flight surgeon.
 - **Self-tests on the tablet.** Reaction test, vision grid (SANS screening), breath counter, private PHQ-9 mood check.
 - **Real NASA lab data.** Inspiration4 blood counts and metabolic panel before and after flight (NASA OSDR OSD-569 and OSD-575).
 - **Live space weather.** Coronal mass ejections and solar flares from NASA DONKI, cached for offline use. A strong event makes KOMEK say "Solar event detected — go to storm shelter".

@@ -57,7 +57,7 @@ Hosting: GitHub Pages. No analytics, no backend, no user accounts.
 
 ## Graphics and icons
 
-All icons, the body silhouette, the KOMEK glyph, the product mark and the charts are original SVG drawn for this project. No stock images, no photos, no logos or emblems of any agency or mission.
+All icons, the body silhouette, the pixel-art KOMEK character, the product mark and the charts are original graphics drawn in code for this project. KOMEK is an original character, not based on any existing one. No stock images, no photos, no logos or emblems of any agency or mission.
 
 ## Data notes
 

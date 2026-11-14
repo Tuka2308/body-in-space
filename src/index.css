@@ -168,6 +168,123 @@
   }
 }
 
+/* KOMEK, the pixel assistant ------------------------------------------ */
+.komek-sprite {
+  display: block;
+  image-rendering: pixelated;
+}
+.komek-eye-shut {
+  opacity: 0;
+  animation: komek-blink-shut 4.2s steps(1) infinite;
+}
+.komek-eye-open {
+  animation: komek-blink-open 4.2s steps(1) infinite;
+}
+.komek-hatch {
+  display: block;
+}
+.komek-window {
+  position: absolute;
+  inset: 0 0 6px 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.komek-ledge {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 0;
+  height: 6px;
+  background: var(--color-line);
+  box-shadow: 0 -2px 0 var(--color-raised);
+}
+.komek-rise {
+  display: block;
+}
+/* Idle: only the eye shows above the ledge, with a slow look-around. */
+.komek-rise-idle {
+  animation: komek-lurk 5s steps(1) infinite;
+}
+/* Something to say: climb out in a few chunky steps, then bob. */
+.komek-rise-notice {
+  animation:
+    komek-climb 520ms steps(5) both,
+    komek-bob 1.2s steps(2) 600ms infinite;
+}
+/* Warning: jump out and shake. */
+.komek-rise-alert {
+  animation:
+    komek-climb 300ms steps(4) both,
+    komek-shake 360ms steps(2) 320ms infinite;
+}
+
+@keyframes komek-blink-shut {
+  0%,
+  93% {
+    opacity: 0;
+  }
+  94%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes komek-blink-open {
+  0%,
+  93% {
+    opacity: 1;
+  }
+  94%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes komek-lurk {
+  0%,
+  100% {
+    transform: translateY(30px);
+  }
+  40% {
+    transform: translateY(26px);
+  }
+  55% {
+    transform: translate(-3px, 26px);
+  }
+  70% {
+    transform: translate(3px, 26px);
+  }
+  85% {
+    transform: translateY(30px);
+  }
+}
+@keyframes komek-climb {
+  from {
+    transform: translateY(40px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes komek-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes komek-shake {
+  0%,
+  100% {
+    transform: translate(-3px, -2px);
+  }
+  50% {
+    transform: translate(3px, -4px);
+  }
+}
+
 /* Body map ------------------------------------------------------------- */
 .zone {
   cursor: pointer;

@@ -15,6 +15,7 @@ import { useSos } from '../state/sos'
 import { useApp } from '../state/store'
 import { MIN, countdownText, durationText, missionDay } from '../state/time'
 import { CloseIcon, SendIcon, SoundIcon } from './icons'
+import { KomekSprite, type KomekMood } from './KomekSprite'
 import { LEVEL_UI } from './level'
 
 const RANK: Record<Level, number> = { ok: 0, caution: 1, alert: 2 }
@@ -22,19 +23,9 @@ const ORGANS: OrganId[] = ['brain', 'eyes', 'heart', 'lungs', 'blood', 'bones', 
 const QUICK = ['Explain my status', 'What should I measure now?', 'Talk to flight surgeon']
 let greeted = false
 
-/** KOMEK's face: a single watchful lens. Not a person, not a known character. */
+/** KOMEK's face in small places (panel header, SOS bar). */
 export function KomekGlyph({ size = 40, level = 'ok' as Level, active = false }) {
-  const color = level === 'ok' ? 'var(--color-link)' : LEVEL_UI[level].color
-  return (
-    <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
-      <circle cx="24" cy="24" r="20" fill="var(--color-void)" stroke={color} strokeWidth="2.5" />
-      <path d="M9 24c5-8 25-8 30 0-5 8-25 8-30 0Z" fill="none" stroke={color} strokeWidth="1.6" opacity="0.55" />
-      <circle cx="24" cy="24" r="7" fill={color}>
-        {active && <animate attributeName="r" values="7;9;7" dur="1.1s" repeatCount="indefinite" />}
-      </circle>
-      <circle cx="26.5" cy="21.5" r="2" fill="var(--color-void)" opacity="0.6" />
-    </svg>
-  )
+  return <KomekSprite size={size} level={level} mood={active ? 'notice' : 'idle'} />
 }
 
 function runAction(action: KomekAction) {
@@ -227,6 +218,7 @@ export function Komek() {
   const [draft, setDraft] = useState('')
   const end = useRef<HTMLDivElement>(null)
   const level = assessments[selectedId].overall
+  const mood: KomekMood = komek.toast?.level === 'alert' || level === 'alert' ? 'alert' : komek.toast || komek.unread > 0 ? 'notice' : 'idle'
 
   useEffect(() => {
     if (komek.open) end.current?.scrollIntoView({ block: 'end' })
@@ -341,15 +333,21 @@ export function Komek() {
       )}
       {!komek.open && (
         <button
-          className="relative flex h-[62px] w-[62px] items-center justify-center rounded-full bg-hull shadow-[0_8px_30px_rgba(0,0,0,0.55)]"
-            onClick={() => komek.setOpen(true)}
-            aria-label={`Open KOMEK, onboard SI assistant${komek.unread > 0 ? `, ${komek.unread} new` : ''}`}
-          >
-            <KomekGlyph size={62} level={level} active={komek.toast !== null} />
-            {komek.unread > 0 && (
-              <span className="num absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-link px-1.5 text-[0.85rem] text-[#0a1024]">{komek.unread}</span>
-            )}
-          </button>
+          className={`komek-hatch relative h-[70px] w-[70px] ${mood === 'idle' ? '' : 'komek-hatch-up'}`}
+          onClick={() => komek.setOpen(true)}
+          aria-label={`Open KOMEK, onboard SI assistant${komek.unread > 0 ? `, ${komek.unread} new` : ''}`}
+        >
+          {/* KOMEK waits behind the ledge and climbs out when it has something to say. */}
+          <span className="komek-window">
+            <span key={`${mood}-${komek.toast?.id ?? 0}`} className={`komek-rise komek-rise-${mood}`}>
+              <KomekSprite size={60} level={level} mood={mood} />
+            </span>
+          </span>
+          <span className="komek-ledge" />
+          {komek.unread > 0 && (
+            <span className="num absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-link px-1.5 text-[0.85rem] text-[#0a1024]">{komek.unread}</span>
+          )}
+        </button>
       )}
     </div>
   )
