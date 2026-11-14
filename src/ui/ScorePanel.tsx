@@ -113,9 +113,9 @@ export function ScorePanel({ member, assessment, readings }: { member: CrewMembe
           ))}
           {tasks.length === 0 && <li className="label">Everything for today is done.</li>}
         </ul>
-        <button className="tap tap-primary mr-[74px] mt-3 text-[1.05rem]" onClick={() => go('measure')}>
+        <button className="tap tap-primary mr-[74px] mt-3 whitespace-nowrap px-3 text-[1.05rem]" onClick={() => go('measure')}>
           <PlusIcon size={22} />
-          Log new measurement
+          Log a measurement
         </button>
         <span className="sr-only">Mission time {clockText(now)}</span>
       </div>

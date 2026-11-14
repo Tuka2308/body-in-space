@@ -108,7 +108,7 @@ export function LineChart({
       )}
       <path d={d} fill="none" stroke={color} strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round" />
       {points.length <= 40 &&
-        points.map((p) => <circle key={p.t} cx={x(p.t)} cy={y(p.value)} r="2.4" fill="var(--color-hull)" stroke={color} strokeWidth="1.4" />)}
+        points.map((p, i) => <circle key={i} cx={x(p.t)} cy={y(p.value)} r="2.4" fill="var(--color-hull)" stroke={color} strokeWidth="1.4" />)}
       <circle cx={step ? x(t1) : x(last.t)} cy={y(last.value)} r="4.2" fill={color} />
     </svg>
   )

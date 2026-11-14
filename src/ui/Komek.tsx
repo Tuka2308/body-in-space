@@ -237,7 +237,7 @@ export function Komek() {
   }
 
   return (
-    <div className="fixed bottom-[46px] right-4 z-40 flex flex-col items-end gap-2">
+    <div className="pointer-events-none fixed bottom-[46px] right-4 z-40 flex flex-col items-end gap-2 [&>*]:pointer-events-auto">
       {komek.open && (
         <section className="flex h-[min(560px,calc(100vh-150px))] w-[min(410px,calc(100vw-32px))] flex-col overflow-hidden rounded-[22px] border border-line bg-hull shadow-[0_18px_60px_rgba(0,0,0,0.6)]" aria-label="KOMEK, onboard SI assistant">
           <header className="flex items-center gap-3 border-b border-line-soft px-3.5 py-2.5">
@@ -283,38 +283,37 @@ export function Komek() {
         </section>
       )}
 
-      <div className="flex items-end gap-2.5">
-        {!komek.open && komek.toast && (
-          <div
-            className="komek-toast max-w-[min(380px,calc(100vw-120px))] rounded-2xl rounded-br-md border bg-hull px-3.5 py-3 text-[0.97rem] leading-snug shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
-            style={{ borderColor: komek.toast.level && komek.toast.level !== 'ok' ? LEVEL_UI[komek.toast.level].color : 'var(--color-line)' }}
-            role="status"
-          >
-            <div className="flex items-start gap-2">
-              <p className="flex-1">{komek.toast.text}</p>
-              <button className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-dim hover:text-star" onClick={komek.dismissToast} aria-label="Dismiss message">
-                <CloseIcon size={18} />
-              </button>
-            </div>
-            {komek.toast.actions && (
-              <div className="mt-2 flex flex-wrap gap-2">
-                {komek.toast.actions.map((action) => (
-                  <button
-                    key={action.label}
-                    className={`min-h-[46px] rounded-xl px-3.5 text-[0.95rem] font-semibold ${action.route === 'sos' ? 'bg-alert text-[#190308]' : 'border border-link text-link'}`}
-                    style={{ fontStretch: '88%' }}
-                    onClick={() => runAction(action)}
-                  >
-                    {action.label}
-                  </button>
-                ))}
-              </div>
-            )}
+      {!komek.open && komek.toast && (
+        <div
+          className="komek-toast w-[min(340px,calc(100vw-32px))] rounded-2xl rounded-br-md border bg-hull px-3.5 py-3 text-[0.97rem] leading-snug shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
+          style={{ borderColor: komek.toast.level && komek.toast.level !== 'ok' ? LEVEL_UI[komek.toast.level].color : 'var(--color-line)' }}
+          role="status"
+        >
+          <div className="flex items-start gap-2">
+            <p className="flex-1">{komek.toast.text}</p>
+            <button className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-dim hover:text-star" onClick={komek.dismissToast} aria-label="Dismiss message">
+              <CloseIcon size={18} />
+            </button>
           </div>
-        )}
-        {!komek.open && (
-          <button
-            className="relative flex h-[62px] w-[62px] items-center justify-center rounded-full bg-hull shadow-[0_8px_30px_rgba(0,0,0,0.55)]"
+          {komek.toast.actions && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {komek.toast.actions.map((action) => (
+                <button
+                  key={action.label}
+                  className={`min-h-[46px] rounded-xl px-3.5 text-[0.95rem] font-semibold ${action.route === 'sos' ? 'bg-alert text-[#190308]' : 'border border-link text-link'}`}
+                  style={{ fontStretch: '88%' }}
+                  onClick={() => runAction(action)}
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      {!komek.open && (
+        <button
+          className="relative flex h-[62px] w-[62px] items-center justify-center rounded-full bg-hull shadow-[0_8px_30px_rgba(0,0,0,0.55)]"
             onClick={() => komek.setOpen(true)}
             aria-label={`Open KOMEK, onboard SI assistant${komek.unread > 0 ? `, ${komek.unread} new` : ''}`}
           >
@@ -323,8 +322,7 @@ export function Komek() {
               <span className="num absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-link px-1.5 text-[0.85rem] text-[#0a1024]">{komek.unread}</span>
             )}
           </button>
-        )}
-      </div>
+      )}
     </div>
   )
 }
