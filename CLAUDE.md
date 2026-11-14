@@ -40,12 +40,13 @@ Demo keys: `D` deterioration, `T` demo time x60, `Shift+R` reset. `?fresh=1` in 
 ## Status
 
 Done: P0 (engine, simulator, dashboard, organ card, Measure, SOS, KOMEK) and P1 (self-tests, NASA OSDR lab view,
-NASA DONKI space weather, daily missions, Remote clinic preset). `README.md`, `REFERENCES.md`, `SUBMISSION.md`,
+NASA DONKI space weather, daily missions, Remote clinic preset) and P2 (Earth view split screen, service worker
+and manifest for offline install; the worker registers in production builds only). `README.md`, `REFERENCES.md`, `SUBMISSION.md`,
 `DEMO_SCRIPT.md` are written.
 
 To do, in order:
 1. Final self-check at 1280x800 and 1920x1080 on the deployed site, console clean, private window.
-2. Optional P2: flight-surgeon split view ("Spacecraft | Earth"), PWA / offline install.
+2. Test offline mode on the deployed site: load once, switch the network off, reload.
 3. Keep `README.md`, `REFERENCES.md` and `SUBMISSION.md` in sync with any new feature or library.
 
 Known issues: the DONKI solar-flare endpoint (FLR) returned 404 on 2026-11-14 while CME worked; the code tolerates it.

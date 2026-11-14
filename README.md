@@ -23,6 +23,8 @@ Halfway to Mars a question to a flight surgeon takes about 14 minutes to arrive 
 - **Live space weather.** Coronal mass ejections and solar flares from NASA DONKI, cached for offline use. A strong event makes KOMEK say "Solar event detected — go to storm shelter".
 - **Mission environments.** ISS, Moon, Mars transit, Mars surface and a "Remote clinic on Earth" preset. They change the link delay, evacuation, gravity and dose rate.
 - **Daily health missions.** Who has done which routine today, with streaks.
+- **Earth view.** Spacecraft and flight surgeon side by side: the Earth side shows only what the signal has had time to deliver.
+- **Works offline.** After the first visit the app is cached by a service worker and can be installed on a tablet.
 
 ## Space-NEWS2
 
