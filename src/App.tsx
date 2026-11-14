@@ -77,7 +77,7 @@ export function App() {
       <footer className="flex h-[34px] shrink-0 items-center justify-between gap-4 border-t border-line-soft bg-hull px-4 text-[0.8rem] text-dim" style={{ fontStretch: '88%' }}>
         <span className="font-semibold text-star">Educational prototype. Not a medical device.</span>
         <span className="hidden truncate lg:block">
-          Vital signs are simulated. Thresholds: RCP NEWS2, NASA-STD-3001, NASA HRP. Lab data: NASA OSDR OSD-569, OSD-575, OSD-656. Space weather: NASA DONKI.
+          Vital signs are simulated. Thresholds: RCP NEWS2, NASA-STD-3001, NASA HRP. Lab data: NASA OSDR OSD-569, OSD-575. Space weather: NASA DONKI.
         </span>
       </footer>
     </div>

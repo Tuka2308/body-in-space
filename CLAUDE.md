@@ -39,13 +39,15 @@ Demo keys: `D` deterioration, `T` demo time x60, `Shift+R` reset. `?fresh=1` in 
 
 ## Status
 
-Done (P0): engine, simulator, dashboard with body map, organ card, Measure, SOS with CPR metronome and Earth Link, KOMEK.
+Done: P0 (engine, simulator, dashboard, organ card, Measure, SOS, KOMEK) and P1 (self-tests, NASA OSDR lab view,
+NASA DONKI space weather, daily missions, Remote clinic preset). `README.md`, `REFERENCES.md`, `SUBMISSION.md`,
+`DEMO_SCRIPT.md` are written.
 
 To do, in order:
-1. P1 tablet-native tests: reaction test, Amsler grid, breath tap counter, PHQ-9 (private).
-2. P1 NASA lab data view: download Inspiration4 CSVs (OSD-569 CBC, OSD-575 CMP) into `public/data/`, inspect the real columns first, chart 3–4 markers L-92 … R+194.
-3. P1 radiation panel: live solar flares / CMEs from NASA DONKI (`https://api.nasa.gov`, DEMO_KEY, cache the last event in localStorage, show it with its date when offline); KOMEK says "Solar event detected — go to storm shelter".
-4. P1 daily missions screen (streaks, no childish elements) and a fifth environment preset "Remote clinic" (numbers labelled illustrative).
-5. P2: flight-surgeon split view, PWA.
-6. Submission files: `README.md`, `REFERENCES.md`, `SUBMISSION.md`, human-check list. `DEMO_SCRIPT.md` exists.
-7. Final self-check at 1280x800 and 1920x1080, console clean, deployed link in a private window.
+1. Final self-check at 1280x800 and 1920x1080 on the deployed site, console clean, private window.
+2. Optional P2: flight-surgeon split view ("Spacecraft | Earth"), PWA / offline install.
+3. Keep `README.md`, `REFERENCES.md` and `SUBMISSION.md` in sync with any new feature or library.
+
+Known issues: the DONKI solar-flare endpoint (FLR) returned 404 on 2026-11-14 while CME worked; the code tolerates it.
+The public DONKI demo key is rate-limited (429), so the feed is cached and retried at most every 10 minutes.
+OSD-656 is cited as reviewed but is not charted.
