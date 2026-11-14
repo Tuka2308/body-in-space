@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { go, useRoute } from './state/route'
 import { resetDemo, useApp } from './state/store'
 import { Dashboard } from './ui/Dashboard'
+import { Komek } from './ui/Komek'
 import { Measure } from './ui/Measure'
 import { OrganCard, isZone } from './ui/OrganCard'
 import { NavRail } from './ui/NavRail'
@@ -63,6 +64,7 @@ export function App() {
           </div>
         </>
       )}
+      <Komek />
       <footer className="flex h-[34px] shrink-0 items-center justify-between gap-4 border-t border-line-soft bg-hull px-4 text-[0.8rem] text-dim" style={{ fontStretch: '88%' }}>
         <span className="font-semibold text-star">Educational prototype. Not a medical device.</span>
         <span className="hidden truncate lg:block">

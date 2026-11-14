@@ -306,7 +306,7 @@ export function Measure({ focus }: { focus?: string }) {
             })}
           </ul>
           <p className="mt-2 text-[0.85rem] leading-snug text-dim">{preview.response}</p>
-          <button className="tap tap-primary mt-3 w-full text-[1.1rem]" onClick={save}>
+          <button className="tap tap-primary mr-[74px] mt-3 text-[1.1rem]" onClick={save}>
             Save and recalculate
           </button>
         </aside>

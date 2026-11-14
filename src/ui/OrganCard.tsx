@@ -9,6 +9,7 @@ import { rollingBaseline } from '../engine/baseline'
 import { lastMeasuredAt, series } from '../engine/readings'
 import type { Finding, Level, NumericMetricKey, OrganId, Reading, ZoneId } from '../engine/types'
 import { worst } from '../engine/types'
+import { useKomek } from '../state/komek'
 import { go } from '../state/route'
 import { useAssessment, useEnvStatus, useReadings, type EnvStatus } from '../state/selectors'
 import { useApp } from '../state/store'
@@ -241,7 +242,11 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
           <p className="label truncate">{isOrgan ? member.name : env.env.name}</p>
         </div>
         <StatusPill level={level} />
-        <button className="tap tap-primary ml-auto" onClick={() => go(isOrgan && chartMetrics[0] ? `measure/${chartMetrics[0]}` : 'measure')}>
+        <button className="tap ml-auto" onClick={() => useKomek.getState().askAbout(zone, content.title)} aria-label={`Ask KOMEK about ${content.title}`}>
+          <span className="num text-[1.3rem] text-link">?</span>
+          Ask KOMEK
+        </button>
+        <button className="tap tap-primary" onClick={() => go(isOrgan && chartMetrics[0] ? `measure/${chartMetrics[0]}` : 'measure')}>
           <PlusIcon size={22} />
           Log new measurement
         </button>
@@ -383,7 +388,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
               </button>
             )}
           </div>
-          <p className="mt-2 text-[0.74rem] leading-snug text-faint">{GUIDANCE_NOTE}</p>
+          <p className="mt-2 pr-[78px] text-[0.74rem] leading-snug text-faint">{GUIDANCE_NOTE}</p>
         </section>
       </div>
     </div>

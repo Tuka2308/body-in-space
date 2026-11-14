@@ -60,6 +60,15 @@ interface AppState {
   setTimeScale: (scale: number) => void
 }
 
+// "?fresh" in the address starts from the untouched demo state (handy for recording).
+if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('fresh')) {
+  try {
+    window.localStorage.removeItem(STORAGE_KEY)
+  } catch {
+    // Storage unavailable: nothing to clear.
+  }
+}
+
 // The mission clock: mission time advances with real time from a movable base.
 const clock = { mission: NOW0, real: Date.now() }
 let liveRand = mulberry32(20261114)

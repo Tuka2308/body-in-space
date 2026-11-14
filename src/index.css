@@ -158,6 +158,10 @@
     animation: cpr-breath 2.5s ease-in-out infinite;
   }
 
+  .komek-toast {
+    animation: rise-in 260ms ease-out both;
+  }
+
   .scroll-quiet {
     scrollbar-width: thin;
     scrollbar-color: var(--color-line) transparent;

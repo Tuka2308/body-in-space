@@ -167,7 +167,7 @@ export function initialLiveTargets(): Record<string, LiveVitals> {
   )
 }
 
-const LIVE_NOISE: Record<keyof LiveVitals, number> = { hr: 0.5, rr: 0.3, spo2: 0.25, sbp: 0.8, dbp: 0.6 }
+const LIVE_NOISE: Record<keyof LiveVitals, number> = { hr: 0.22, rr: 0.25, spo2: 0.22, sbp: 0.6, dbp: 0.5 }
 
 /** One wearable sample around the current target. */
 export function liveSample(target: LiveVitals, rand: () => number): LiveVitals {
