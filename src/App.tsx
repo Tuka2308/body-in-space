@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { go, useRoute } from './state/route'
 import { resetDemo, useApp } from './state/store'
 import { Dashboard } from './ui/Dashboard'
 import { EarthView } from './ui/EarthView'
+import { Intro } from './ui/Intro'
 import { Komek } from './ui/Komek'
 import { Lab } from './ui/Lab'
 import { Measure } from './ui/Measure'
@@ -15,6 +16,8 @@ import { TopBar } from './ui/TopBar'
 
 export function App() {
   const [view = '', param] = useRoute()
+  // The title screen opens every visit that starts on the dashboard; deep links skip it.
+  const [intro, setIntro] = useState(() => window.location.hash.replace(/^#\/?/, '') === '')
 
   // Mission clock and wearable feed: one tick per second.
   useEffect(() => {
@@ -24,12 +27,15 @@ export function App() {
     return () => window.clearInterval(timer)
   }, [])
 
+  const introRef = useRef(intro)
+  introRef.current = intro
+
   // Demo keys. D: crew member deteriorates. T: demo time ×60. Shift+R: reset everything.
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return
-      if (event.metaKey || event.ctrlKey || event.altKey) return
+      if (event.metaKey || event.ctrlKey || event.altKey || introRef.current) return
       const key = event.key.toLowerCase()
       if (key === 'd') {
         useApp.getState().startScenario()
@@ -44,6 +50,8 @@ export function App() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
+
+  if (intro) return <Intro onStart={() => setIntro(false)} />
 
   return (
     <div className="flex h-full flex-col">

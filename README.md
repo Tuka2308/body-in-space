@@ -13,6 +13,7 @@ Live demo: https://tuka2308.github.io/body-in-space/ (add `?fresh=1` to start fr
 
 Halfway to Mars a question to a flight surgeon takes about 14 minutes to arrive and the earliest answer is about 29 minutes away. The app is built around that fact: it guides the crew first and reports to Earth afterwards.
 
+- **Title screen.** One fact first: halfway to Mars, Earth's answer is 29 minutes away.
 - **Body map.** A tappable figure with a zone for brain and mind, eyes, heart, lungs, blood, bones and muscles, temperature, plus cabin air and radiation around it. Every status has a colour, a shape and a word.
 - **How / why / what to do.** Each zone shows how to measure it in microgravity, why it matters in space (every number with its source) and what to do for the current status.
 - **Space-NEWS2.** Our scoring method, described below.
