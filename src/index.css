@@ -228,6 +228,23 @@
 .zone-outline.zone-ok > ellipse {
   stroke: color-mix(in srgb, var(--z) 38%, var(--color-dim));
 }
+.zone-outline > path {
+  vector-effect: non-scaling-stroke;
+}
+.body-detail {
+  pointer-events: none;
+}
+.body-detail path {
+  fill: none;
+  stroke: var(--color-star);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: 0.13;
+}
+.body-detail circle {
+  fill: var(--color-star);
+  opacity: 0.2;
+}
 .draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;

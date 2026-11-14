@@ -46,8 +46,13 @@ const CHIPS: ChipDef[] = [
 
 // Right half of the silhouette (viewer's right); the left half is its mirror image.
 const HALF_OUTLINE =
-  'M396 134 L396 150 C400 166 422 172 446 178 C470 184 481 204 483 228 L492 330 L506 420 C510 440 506 462 496 470 C486 474 480 462 480 446 L468 340 L456 252 L452 238 C450 290 444 330 446 370 C450 400 458 420 458 450 L452 560 L444 668 C446 686 452 694 440 700 L408 700 C400 696 404 684 406 668 L404 560 L392 462 L380 452'
-const HALF_FILL = `M380 134 ${HALF_OUTLINE.slice(1)} Z`
+  'M392 138 C392 146 393 152 394 157 C398 163 406 166 416 169 C430 173 444 176 454 181 C470 187 483 200 487 220 C490 250 492 280 494 306 C500 332 506 370 508 404 C512 418 514 440 509 456 C505 468 494 474 488 466 C484 458 486 440 484 424 C481 384 474 352 470 322 C466 296 462 268 458 246 C457 274 451 302 447 330 C444 350 446 366 452 384 C458 400 462 424 462 448 C462 490 456 530 450 562 C454 590 454 620 448 650 C446 664 444 676 444 684 C446 694 454 700 456 706 C456 712 440 712 420 712 L408 712 C404 704 406 692 407 684 C408 650 410 610 406 580 C404 570 404 560 405 552 C404 520 398 486 390 462 C388 456 384 452 380 452'
+const HALF_FILL = `M380 138 ${HALF_OUTLINE.slice(1)} Z`
+// Half of the head, from the crown down the jaw to the chin.
+const HALF_HEAD = 'M380 48 C403 48 417 66 417 92 C417 104 414 114 409 123 C403 134 393 143 380 144'
+// Quiet anatomical hints: collarbone, chest, ribs, hip line, knee.
+const HALF_DETAIL =
+  'M386 173 C402 168 424 171 444 180 M380 204 C398 214 428 214 448 232 M388 296 C408 300 432 292 446 270 M390 322 C408 324 430 316 444 300 M380 432 C402 428 436 410 454 384 M414 556 C422 548 436 548 444 556'
 
 const zoneStyle = (level: Level): CSSProperties => ({ '--z': LEVEL_UI[level].color }) as CSSProperties
 
@@ -94,6 +99,10 @@ export function BodyMap({ zones, onOpen, heartRate, breathRate }: Props) {
           <stop offset="0" stopColor="#18233a" />
           <stop offset="1" stopColor="#0d1424" />
         </linearGradient>
+        <radialGradient id="body-core" cx="0.5" cy="0.35" r="0.6">
+          <stop offset="0" stopColor="#8ea8ff" stopOpacity="0.1" />
+          <stop offset="1" stopColor="#8ea8ff" stopOpacity="0" />
+        </radialGradient>
       </defs>
 
       {/* The crew member inside their environment: cabin air (solid ring) and radiation (dashed ring). */}
@@ -105,7 +114,15 @@ export function BodyMap({ zones, onOpen, heartRate, breathRate }: Props) {
       <g>
         <path d={HALF_FILL} fill="url(#body-fill)" />
         <path d={HALF_FILL} fill="url(#body-fill)" transform="translate(760 0) scale(-1 1)" />
-        <ellipse cx="380" cy="94" rx="38" ry="46" fill="url(#body-fill)" />
+        <path d={`${HALF_HEAD} Z`} fill="url(#body-fill)" />
+        <path d={`${HALF_HEAD} Z`} fill="url(#body-fill)" transform="translate(760 0) scale(-1 1)" />
+        <ellipse cx="380" cy="300" rx="70" ry="150" fill="url(#body-core)" />
+        <g className="body-detail">
+          <path d={HALF_DETAIL} />
+          <path d={HALF_DETAIL} transform="translate(760 0) scale(-1 1)" />
+          <path d="M380 176V300" />
+          <circle cx="380" cy="388" r="2" />
+        </g>
       </g>
       <g
         className={`zone zone-outline zone-${zones.skin.level}`}
@@ -117,7 +134,8 @@ export function BodyMap({ zones, onOpen, heartRate, breathRate }: Props) {
       >
         <path className="draw" pathLength={1} d={HALF_OUTLINE} />
         <path className="draw" pathLength={1} d={HALF_OUTLINE} transform="translate(760 0) scale(-1 1)" />
-        <ellipse className="draw" pathLength={1} cx="380" cy="94" rx="38" ry="46" />
+        <path className="draw" pathLength={1} d={HALF_HEAD} />
+        <path className="draw" pathLength={1} d={HALF_HEAD} transform="translate(760 0) scale(-1 1)" />
       </g>
 
       <Zone id="brain" level={zones.brain.level} label={label('brain', 'Brain and mind')} onOpen={onOpen} hit={<ellipse cx="380" cy="76" rx="40" ry="30" />}>
