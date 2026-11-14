@@ -56,20 +56,22 @@ function TestMenu() {
         <h1 className="heading text-[1.7rem]">Self-tests on this tablet</h1>
         <p className="label">{member.name}. No extra sensors needed. Screening checks for training, not clinical tests.</p>
       </header>
-      <div className="grid min-h-0 flex-1 grid-cols-2 gap-3">
+      <ul className="flex min-h-0 flex-1 flex-col pr-[88px]">
         {TESTS.map((t) => (
-          <button key={t.id} onClick={() => go(`tests/${t.id}`)} className="panel flex flex-col items-start justify-between gap-3 p-5 text-left transition-colors hover:bg-panel">
-            <span>
-              <span className="label">
-                {t.zone}, {t.time}
+          <li key={t.id} className="flex min-h-0 flex-1 border-t border-line first:border-t-0">
+            <button onClick={() => go(`tests/${t.id}`)} className="grid w-full grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)_auto] items-center gap-6 rounded-[8px] px-3 text-left transition-colors hover:bg-hull">
+              <span className="heading text-[2.2rem]">{t.title}</span>
+              <span>
+                <span className="block max-w-[52ch] text-[1.08rem]">{t.text}</span>
+                <span className="label mt-1 block">
+                  {t.zone}, {t.time}
+                </span>
               </span>
-              <span className="heading mt-1 block text-[2rem]">{t.title}</span>
-              <span className="mt-2 block max-w-[46ch] text-[1.05rem] text-dim">{t.text}</span>
-            </span>
-            <span className="tap tap-primary pointer-events-none">Start</span>
-          </button>
+              <span className="tap tap-primary pointer-events-none min-w-[110px]">Start</span>
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   )
 }
@@ -287,7 +289,7 @@ function BreathTest() {
         {left !== null && !done && (
           <>
             <p className="num text-[2.4rem] text-dim">{left} s left</p>
-            <button onPointerDown={() => setCount((c) => c + 1)} className="flex h-[260px] w-[260px] flex-col items-center justify-center rounded-full border-4 border-link bg-link-deep active:scale-95">
+            <button onPointerDown={() => setCount((c) => c + 1)} className="flex h-[260px] w-[260px] flex-col items-center justify-center rounded-full border-4 border-star bg-raised active:scale-95">
               <span className="num text-[6rem]">{count}</span>
               <span className="heading text-[1.2rem]">tap each breath</span>
             </button>
@@ -382,7 +384,7 @@ function MoodTest() {
                   key={label}
                   aria-pressed={answers[i] === value}
                   onClick={() => setAnswers((prev) => prev.map((a, j) => (j === i ? value : a)))}
-                  className={`min-h-[56px] rounded-[8px] border px-1 text-[0.82rem] font-semibold leading-tight ${answers[i] === value ? 'border-link bg-link-deep text-star' : 'border-line bg-raised text-dim'}`}
+                  className={`min-h-[56px] rounded-[8px] border px-1 text-[0.82rem] font-semibold leading-tight ${answers[i] === value ? 'border-star bg-raised text-star' : 'border-line bg-raised text-dim'}`}
                   style={{ fontStretch: '82%' }}
                 >
                   {label}

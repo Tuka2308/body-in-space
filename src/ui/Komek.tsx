@@ -306,7 +306,7 @@ export function Komek() {
         </section>
       )}
 
-      {!komek.open && komek.toast && !toastIsHere && (
+      {!komek.open && komek.toast && !toastIsHere && (view === '' || komek.toast.level === 'alert') && (
         <div
           className="komek-toast w-[min(340px,calc(100vw-32px))] rounded-[10px] rounded-br-[2px] border bg-hull px-3.5 py-3 text-[0.97rem] leading-snug shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
           style={{ borderColor: komek.toast.level && komek.toast.level !== 'ok' ? LEVEL_UI[komek.toast.level].color : 'var(--color-line)' }}

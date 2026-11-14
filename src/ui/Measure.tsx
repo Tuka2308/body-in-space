@@ -230,7 +230,7 @@ export function Measure({ focus }: { focus?: string }) {
                     aria-pressed={form.onO2 === option.on}
                     onClick={() => setForm((f) => ({ ...f, onO2: option.on }))}
                     className={`min-h-[60px] rounded-[8px] border text-[0.98rem] font-semibold ${
-                      form.onO2 === option.on ? 'border-link bg-link-deep text-star' : 'border-line bg-raised text-dim'
+                      form.onO2 === option.on ? 'border-star bg-raised text-star' : 'border-line bg-raised text-dim'
                     }`}
                     style={{ fontStretch: '86%' }}
                   >
@@ -254,7 +254,7 @@ export function Measure({ focus }: { focus?: string }) {
                     className={`min-h-[60px] rounded-[8px] border px-1 text-[0.93rem] font-semibold ${
                       form.consciousness === option.id
                         ? option.id === 'A'
-                          ? 'border-link bg-link-deep text-star'
+                          ? 'border-star bg-raised text-star'
                           : 'border-alert bg-alert-deep text-star'
                         : 'border-line bg-raised text-dim'
                     }`}

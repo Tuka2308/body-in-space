@@ -234,7 +234,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
   const link = linkText(env.env)
 
   return (
-    <div className="flex h-full min-h-0 flex-col gap-3 p-3">
+    <div className="flex h-full min-h-0 flex-col gap-4 p-4">
       <header className="flex items-center gap-3">
         <button className="tap px-3" onClick={() => go('')} aria-label="Back to crew dashboard">
           <BackIcon />
@@ -255,8 +255,8 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
         </button>
       </header>
 
-      <div className="grid min-h-0 flex-1 grid-cols-12 grid-rows-[auto_minmax(0,1fr)] gap-3">
-        <section className="panel col-span-5 flex flex-col gap-3 p-4" aria-label="Current values">
+      <div className="grid min-h-0 flex-1 grid-cols-12 grid-rows-[auto_minmax(0,1fr)] gap-x-6 gap-y-4">
+        <section className="col-span-5 flex flex-col gap-3 px-1" aria-label="Current values">
           <p className="text-[0.98rem] text-dim">{content.what}</p>
           <div className={`grid gap-2.5 ${tiles.length >= 4 ? 'grid-cols-2' : tiles.length === 1 ? 'grid-cols-1' : tiles.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
             {tiles.map((tile) => (
@@ -265,7 +265,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
           </div>
         </section>
 
-        <section className="panel col-span-7 flex min-h-0 flex-col p-4" aria-label="Seven-day trend">
+        <section className="col-span-7 flex min-h-0 flex-col px-1" aria-label="Seven-day trend">
           {chart && activeKey ? (
             <>
               <div className="flex items-center justify-between gap-3">
@@ -278,7 +278,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
                         onClick={() => setChartKey(key)}
                         aria-pressed={key === activeKey}
                         className={`min-h-[44px] rounded-[8px] border px-3 text-[0.9rem] font-semibold ${
-                          key === activeKey ? 'border-link bg-link-deep text-star' : 'border-line text-dim hover:text-star'
+                          key === activeKey ? 'border-star bg-raised text-star' : 'border-line text-dim hover:text-star'
                         }`}
                         style={{ fontStretch: '86%' }}
                       >
@@ -324,7 +324,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
           )}
         </section>
 
-        <section className="panel col-span-4 flex min-h-0 flex-col p-4" aria-label="How to measure">
+        <section className="col-span-4 flex min-h-0 flex-col border-t border-line px-1 pt-4" aria-label="How to measure">
           <h2 className="heading text-[1.2rem]">How to measure</h2>
           <ol className="scroll-quiet mt-2 flex min-h-0 flex-1 flex-col gap-2 overflow-auto">
             {content.how.map((step, i) => (
@@ -337,7 +337,7 @@ export function OrganCard({ zone }: { zone: ZoneId }) {
           </ol>
         </section>
 
-        <section className="panel col-span-4 flex min-h-0 flex-col p-4" aria-label="Why it matters in space">
+        <section className="col-span-4 flex min-h-0 flex-col border-t border-line px-1 pt-4" aria-label="Why it matters in space">
           <h2 className="heading text-[1.2rem]">Why it matters in space</h2>
           <ul className="scroll-quiet mt-2 flex min-h-0 flex-1 flex-col gap-3 overflow-auto">
             {content.why.map((fact) => (

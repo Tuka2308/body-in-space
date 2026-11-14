@@ -117,7 +117,7 @@ export function Lab() {
             key={m.id}
             onClick={() => setMarkerId(m.id)}
             aria-pressed={m.id === markerId}
-            className={`min-h-[56px] rounded-[8px] border px-4 font-semibold ${m.id === markerId ? 'border-link bg-link-deep text-star' : 'border-line bg-panel text-dim hover:text-star'}`}
+            className={`min-h-[56px] rounded-[8px] border px-4 font-semibold ${m.id === markerId ? 'border-star bg-raised text-star' : 'border-line bg-panel text-dim hover:text-star'}`}
             style={{ fontStretch: '86%' }}
           >
             {m.label}
