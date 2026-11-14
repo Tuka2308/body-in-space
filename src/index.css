@@ -146,9 +146,194 @@
     background: #ff6b79;
   }
 
+  /* A changed score lands with a short settle, so the eye catches the recalculation. */
+  .score-pop {
+    animation: score-pop 520ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  }
+
   .scroll-quiet {
     scrollbar-width: thin;
     scrollbar-color: var(--color-line) transparent;
+  }
+}
+
+/* Body map ------------------------------------------------------------- */
+.zone {
+  cursor: pointer;
+  outline: none;
+}
+.zone > path,
+.zone > circle,
+.zone > g > path,
+.zone > g > circle {
+  fill: color-mix(in srgb, var(--z) 16%, transparent);
+  stroke: var(--z);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition:
+    fill 500ms ease,
+    stroke 500ms ease;
+}
+.zone .zone-detail {
+  fill: none;
+  stroke-width: 1.3;
+  opacity: 0.7;
+}
+.zone .zone-dot,
+.zone .zone-solid {
+  fill: color-mix(in srgb, var(--z) 55%, transparent);
+}
+.zone .zone-bone {
+  fill: none;
+  stroke-width: 7;
+  opacity: 0.75;
+}
+.zone .zone-hit > * {
+  fill: transparent;
+  stroke: none;
+}
+.zone:hover > path,
+.zone:hover > g > path {
+  fill: color-mix(in srgb, var(--z) 30%, transparent);
+}
+.zone-caution,
+.zone-alert {
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--z) 70%, transparent));
+}
+.zone-alert {
+  animation: zone-pulse 1.1s ease-in-out infinite;
+}
+.zone-outline > path,
+.zone-outline > ellipse {
+  fill: none;
+  stroke: color-mix(in srgb, var(--z) 62%, var(--color-star));
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: stroke 500ms ease;
+}
+.zone-outline.zone-ok > path,
+.zone-outline.zone-ok > ellipse {
+  stroke: color-mix(in srgb, var(--z) 38%, var(--color-dim));
+}
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-in 1.5s cubic-bezier(0.3, 0, 0.2, 1) 120ms forwards;
+}
+.env-ring {
+  fill: none;
+  stroke: var(--z);
+  stroke-width: 1.4;
+  opacity: 0.32;
+  transition: stroke 500ms ease;
+}
+.env-ring-dashed {
+  stroke-dasharray: 3 9;
+  stroke-linecap: round;
+  opacity: 0.5;
+}
+.beat {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: beat 1s ease-in-out infinite;
+}
+.breathe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 4s ease-in-out infinite;
+}
+.chip {
+  cursor: pointer;
+}
+.chip rect {
+  fill: var(--color-panel);
+  stroke: var(--color-line);
+  stroke-width: 1.2;
+  transition:
+    fill 160ms ease,
+    stroke 300ms ease;
+}
+.chip-caution rect,
+.chip-alert rect {
+  stroke: var(--z);
+  fill: color-mix(in srgb, var(--z) 9%, var(--color-panel));
+}
+.chip-alert rect {
+  stroke-width: 2;
+}
+.chip:hover rect {
+  fill: var(--color-raised);
+}
+.chip:focus-visible {
+  outline: none;
+}
+.chip:focus-visible rect {
+  stroke: var(--color-link);
+  stroke-width: 3;
+}
+.chip-title {
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: 76%;
+  fill: var(--color-star);
+}
+.chip-value {
+  font-size: 16.5px;
+  font-weight: 500;
+  font-stretch: 78%;
+  fill: var(--color-dim);
+  font-variant-numeric: tabular-nums;
+}
+.chip-caution .chip-value,
+.chip-alert .chip-value {
+  fill: var(--z);
+}
+
+@keyframes score-pop {
+  from {
+    transform: scale(1.35);
+    opacity: 0.4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.13);
+  }
+  30% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.07);
+  }
+  58% {
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.045);
   }
 }
 
