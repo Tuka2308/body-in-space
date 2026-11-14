@@ -1,0 +1,193 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/saira/wdth.css';
+
+/*
+  Design tokens. One typeface (Saira, variable width + weight):
+  condensed widths carry numerals and headings, normal width carries reading text.
+  Status colours own all the saturation; the periwinkle accent stays quiet and
+  is reserved for selection and for anything about the link to Earth.
+*/
+@theme {
+  --font-sans: 'Saira Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-void: #070b14;
+  --color-hull: #0e1525;
+  --color-panel: #141d31;
+  --color-raised: #1c2740;
+  --color-line: #2a3754;
+  --color-line-soft: #1d2942;
+
+  --color-star: #e8eef7;
+  --color-dim: #9aa8bf;
+  --color-faint: #66758f;
+
+  --color-link: #8ea8ff;
+  --color-link-deep: #2b3a70;
+
+  --color-ok: #3ddc97;
+  --color-ok-deep: #0f3d2c;
+  --color-caution: #ffb020;
+  --color-caution-deep: #4a3306;
+  --color-alert: #ff4d5e;
+  --color-alert-deep: #521821;
+
+  --radius-control: 14px;
+  --radius-panel: 20px;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-void);
+    color: var(--color-star);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.45;
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-link);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-link-deep);
+  }
+}
+
+@layer components {
+  /* Condensed numerals: every reading on screen uses this. */
+  .num {
+    font-stretch: 72%;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .heading {
+    font-stretch: 80%;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    line-height: 1.1;
+  }
+
+  .label {
+    font-stretch: 88%;
+    font-weight: 500;
+    color: var(--color-dim);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+
+  .panel {
+    background: var(--color-hull);
+    border: 1px solid var(--color-line-soft);
+    border-radius: var(--radius-panel);
+  }
+
+  /* Minimum 56px touch targets: gloved hands, microgravity. */
+  .tap {
+    min-height: 56px;
+    min-width: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0 1.25rem;
+    border-radius: var(--radius-control);
+    border: 1px solid var(--color-line);
+    background: var(--color-panel);
+    font-stretch: 88%;
+    font-weight: 600;
+    transition:
+      background 120ms ease,
+      border-color 120ms ease,
+      transform 80ms ease;
+  }
+  .tap:hover {
+    background: var(--color-raised);
+  }
+  .tap:active {
+    transform: scale(0.98);
+  }
+  .tap-primary {
+    background: var(--color-link);
+    border-color: var(--color-link);
+    color: #0a1024;
+  }
+  .tap-primary:hover {
+    background: #a5baff;
+  }
+  .tap-alert {
+    background: var(--color-alert);
+    border-color: var(--color-alert);
+    color: #1a0308;
+  }
+  .tap-alert:hover {
+    background: #ff6b79;
+  }
+
+  .scroll-quiet {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+}
+
+@keyframes zone-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes link-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
